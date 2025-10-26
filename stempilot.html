@@ -136,6 +136,22 @@
         #viz-drone-group {
             transition: transform 0.05s linear;
         }
+
+        /* Scroll down arrow */
+        .scroll-down {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-15px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -148,8 +164,10 @@
         <p class="mt-4 max-w-2xl text-lg text-gray-600">
             We make STEM education thrilling by teaching you to build and fly your own FPV drones.
         </p>
-        <a href="#kits" class="mt-8 px-8 py-4 bg-blue-600 text-white font-bold rounded-lg shadow-lg hover:bg-blue-700 transition-colors">
-            Explore The Kits
+        <!-- Removed "Explore Kits" button, added scroll prompt -->
+        <a href="#about" class="mt-12 absolute bottom-10 scroll-down">
+            <span class="text-lg text-gray-600">Learn More</span>
+            <svg class="w-6 h-6 text-gray-600 mx-auto mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </a>
     </header>
 
@@ -195,6 +213,12 @@
                             STEMPilot bridges this gap. Our 3-level system "hides the vegetables" by embedding complex lessons in the engaging, hands-on process of building and flying a drone you can actually repair and upgrade.
                         </loc>
                     </div>
+                </div>
+                <!-- NEW: CTA Button linking to kits -->
+                <div class="text-center mt-16">
+                     <a href="#kits" class="px-8 py-4 bg-blue-600 text-white font-bold rounded-lg shadow-lg hover:bg-blue-700 transition-colors">
+                        See The Drone Kits
+                    </a>
                 </div>
             </div>
         </section>
@@ -506,7 +530,7 @@
                             
                             <div class="p-4 rounded-lg lesson-box mt-4">
                                 <h5 class="font-bold text-blue-700">Pro-Tip</h5>
-                                <p class="text-sm text-gray-700">As you fly forward, you'll need to add a little <strong>extra throttle</strong> (push the left stick up slightly) to maintain your height.</p>
+                                <p class="text-sm text-gray-700">As you fly forward, you'll need to add a little extra throttle (push the left stick up slightly) to maintain your height.</p>
                             </div>
                         </div>
                     </div>
@@ -560,47 +584,47 @@
                 </div>
                 <div>
                     <h3 class="text-2xl font-bold mb-2 border-b-2 border-blue-500 pb-1">Phase 1: Building the Core</h3>
-                    <p class="my-4 text-gray-700"><strong>Step 1: Mount the Motors.</strong> Secure the four motors using the M1.4 screws. Make sure the motor wires face inwards.</p>
+                    <p class="my-4 text-gray-700">Step 1: Mount the Motors. Secure the four motors using the M1.4 screws. Make sure the motor wires face inwards.</p>
                     <img src="https://github.com/mh907873-creator/Website/blob/main/images/%231motorscrews.png?raw=true" alt="Motor Screws Diagram" class="block mx-auto rounded-lg border border-gray-300 mb-2">
                     <img src="https://github.com/mh907873-creator/Website/blob/main/images/%232motororientation.png?raw=true" alt="Motor Orientation Diagram" class="block mx-auto rounded-lg border border-gray-300">
-                     <p class="my-4 text-gray-700"><strong>Step 2: Mount the Flight Controller (FC).</strong> Place the FC onto the frame's posts, ensuring the USB port aligns with the cutout.</p>
+                     <p class="my-4 text-gray-700">Step 2: Mount the Flight Controller (FC). Place the FC onto the frame's posts, ensuring the USB port aligns with the cutout.</p>
                      <img src="https://github.com/mh907873-creator/Website/blob/main/images/%233fcplacement.png?raw=true" alt="FC Placement Diagram" class="block mx-auto rounded-lg border border-gray-300">
                      <div class="p-4 rounded-lg lesson-box mt-4">
                         <h4 class="font-bold text-blue-700">STEM Lesson: The Drone's Inner Ear</h4>
-                        <p class="text-sm text-gray-700">This board is your drone's brain and inner ear. It has a tiny sensor called a <strong>gyroscope</strong> that feels any tilt and instantly tells the motors how to adjust, keeping your drone balanced in the air.</p>
+                        <p class="text-sm text-gray-700">This board is your drone's brain and inner ear. It has a tiny sensor called a gyroscope that feels any tilt and instantly tells the motors how to adjust, keeping your drone balanced in the air.</p>
                     </div>
                 </div>
                 <div>
                     <h3 class="text-2xl font-bold mb-2 border-b-2 border-blue-500 pb-1">Phase 2: Canopy & Connections</h3>
-                    <p class="my-4 text-gray-700"><strong>Step 3: Prepare the Canopy.</strong> Insert the camera into the canopy and secure it with the two small screws.</p>
+                    <p class="my-4 text-gray-700">Step 3: Prepare the Canopy. Insert the camera into the canopy and secure it with the two small screws.</p>
                     <img src="https://github.com/mh907873-creator/Website/blob/main/images/%234cameraassembly.png?raw=true" alt="Camera Assembly Diagram" class="block mx-auto rounded-lg border border-gray-300 mb-2">
-                     <p class="my-4 text-gray-700"><strong>Step 4: Connect and Mount.</strong> Connect the camera cable to the FC, poke the antenna through, and mount the canopy.</p>
+                     <p class="my-4 text-gray-700">Step 4: Connect and Mount. Connect the camera cable to the FC, poke the antenna through, and mount the canopy.</p>
                     <img src="https://github.com/mh907873-creator/Website/blob/main/images/%235canopymounting.png?raw=true" alt="Canopy Mounting Diagram" class="block mx-auto rounded-lg border border-gray-300">
                     <div class="p-4 rounded-lg lesson-box mt-4">
                         <h4 class="font-bold text-blue-700">STEM Lesson: The Drone's TV Station</h4>
-                        <p class="text-sm text-gray-700">The camera is the studio, and a chip on your Flight Controller called the <strong>Video Transmitter (VTX)</strong> is the broadcast antenna. It sends the image from the camera through the air to your FPV goggles!</p>
+                        <p class="text-sm text-gray-700">The camera is the studio, and a chip on your Flight Controller called the Video Transmitter (VTX) is the broadcast antenna. It sends the image from the camera through the air to your FPV goggles!</p>
                     </div>
                 </div>
                 <div>
                     <h3 class="text-2xl font-bold mb-2 border-b-2 border-blue-500 pb-1">Phase 3: Final Assembly</h3>
-                     <p class="my-4 text-gray-700"><strong>Step 5: Secure the Wires.</strong> Neatly tuck each motor wire into the frame's channels and plug them into the flight controller.</p>
+                     <p class="my-4 text-gray-700">Step 5: Secure the Wires. Neatly tuck each motor wire into the frame's channels and plug them into the flight controller.</p>
                      <img src="https://github.com/mh907873-creator/Website/blob/main/images/%236motorwireroute.png?raw=true" alt="Motor Wire Routing Diagram" class="block mx-auto rounded-lg border border-gray-300 mb-2">
-                     <p class="my-4 text-gray-700"><strong>Step 6: Motor Test.</strong> Secure the battery. With props OFF, arm the drone and check motor spin direction.</p>
+                     <p class="my-4 text-gray-700">Step 6: Motor Test. Secure the battery. With props OFF, arm the drone and check motor spin direction.</p>
                      <img src="https://github.com/mh907873-creator/Website/blob/main/images/%237batteryplacement.png?raw=true" alt="Battery Placement Diagram" class="block mx-auto rounded-lg border border-gray-300 mb-2">
                      <img src="https://github.com/mh907873-creator/Website/blob/main/images/%238motorspindirection.png?raw=true" alt="Motor Spin Direction Diagram" class="block mx-auto rounded-lg border border-gray-300">
                      <div class="p-4 rounded-lg lesson-box mt-4">
                         <h4 class="font-bold text-blue-700">STEM Lesson: The Spark of Life</h4>
-                        <p class="text-sm text-gray-700">Your drone is a <strong>fundamental electrical circuit</strong>. When you plug in the battery, you complete the path, allowing electricity to flow from the battery to the "brain" (FC) and then to the motors, bringing your creation to life!</p>
+                        <p class="text-sm text-gray-700">Your drone is a fundamental electrical circuit. When you plug in the battery, you complete the path, allowing electricity to flow from the battery to the "brain" (FC) and then to the motors, bringing your creation to life!</p>
                     </div>
                 </div>
                 <div>
                     <h3 class="text-2xl font-bold mb-2 border-b-2 border-blue-500 pb-1">Phase 4: Ready for Flight</h3>
-                    <p class="my-4 text-gray-700"><strong>Step 7: Install Propellers.</strong> With the battery UNPLUGGED, press the propellers firmly onto the motor shafts. Ensure they match the CW/CCW diagram exactly.</p>
+                    <p class="my-4 text-gray-700">Step 7: Install Propellers. With the battery UNPLUGGED, press the propellers firmly onto the motor shafts. Ensure they match the CW/CCW diagram exactly.</p>
                     <img src="https://github.com/mh907873-creator/Website/blob/main/images/CWCCWProporientation.png?raw=true" alt="Propeller Orientation Diagram" class="block mx-auto rounded-lg border border-gray-300">
                     <div class="p-4 rounded-lg lesson-box mt-4">
                         <h4 class="font-bold text-blue-700">STEM Lesson: The Secret of Lift</h4>
                         <img src="https://github.com/mh907873-creator/Website/blob/main/images/liftdiagram.png?raw=true" alt="Lift Diagram" class="block mx-auto rounded-lg border border-gray-300 my-2">
-                        <p class="text-sm text-gray-700">How does a drone fly? It's all about <strong>Newton's Third Law</strong>: For every action, there is an equal and opposite reaction. Your propellers push air down (action), and the air pushes the drone up (reaction), creating lift!</p>
+                        <p class="text-sm text-gray-700">How does a drone fly? It's all about Newton's Third Law: For every action, there is an equal and opposite reaction. Your propellers push air down (action), and the air pushes the drone up (reaction), creating lift!</p>
                     </div>
                 </div>
                 <div class="pt-8 mt-8 border-t-2 border-gray-200">
@@ -896,9 +920,9 @@
 
                     if (lMag > rMag && lMag > 0.3) {
                         if (Math.abs(stickState.left.x) > Math.abs(stickState.left.y + 1)) {
-                             text = stickState.left.x < 0 ? 'YAW LEFT (TURN LEFT)' : 'YAW RIGHT (TURN RIGHT)';
+                             text = stickState.left.x < 0 ? 'YAW (TURN LEFT)' : 'YAW (TURN RIGHT)';
                         } else if (stickState.left.y > -0.5) {
-                            text = 'THROTTLE UP (ASCEND)';
+                            text = 'THROTTLE (ASCEND)';
                         }
                     } else if (rMag > lMag && rMag > 0.3) {
                          if (Math.abs(stickState.right.x) > Math.abs(stickState.right.y)) {
@@ -955,7 +979,7 @@
                     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
                     const svgX = (clientX - CTM.e) / CTM.a;
-                    const svgY = (clientY - CTM.f) / CTM.d; 
+                    const svgY = (clientY - CTM.f) / CTM.d; // <-- FIXED: Was 'CM' now 'CTM'
                     
                     let dx = svgX - base_x;
                     let dy = svgY - base_y;
