@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEMPilot - Build. Fly. Learn.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF;
+            color: #1F2937;
+        }
+        .font-zcool {
+            font-family: 'ZCOOL QingKe HuangYou', cursive;
+        }
+        .hero-bg {
+             background-color: #FFFFFF; /* Pure white background */
+        }
+        .glass-pane {
+            background: rgba(243, 244, 246, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .tab-active {
+            background-color: #3B82F6;
+            color: #FFFFFF;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6); 
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background-color: #F9FAFB;
+            margin: 5% auto;
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            width: 90%;
+            max-width: 800px;
+            border-radius: 0.75rem;
+            position: relative;
+            color: #1F2937;
+        }
+        .modal-body {
+            max-height: 70vh;
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+        .modal-body::-webkit-scrollbar { width: 8px; }
+        .modal-body::-webkit-scrollbar-track { background: #E5E7EB; }
+        .modal-body::-webkit-scrollbar-thumb { background: #3B82F6; border-radius: 4px; }
+        .lesson-box {
+            background-color: #EBF8FF;
+            border-left: 4px solid #3B82F6;
+            color: #1F2937;
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #3B82F6;
+            animation: spin 1s ease infinite;
+            display: none;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .controller-diagram g, .controller-diagram .switch { cursor: pointer; }
+        .controller-diagram .switch:hover rect { stroke: #a0aec0; }
+        .switch.active rect { fill: #f56565; }
+        .build-guide-tab {
+            border-color: transparent;
+            border-bottom-width: 2px;
+        }
+        .build-guide-tab-active {
+            border-color: #3B82F6;
+            color: #3B82F6;
+        }
+        /* Style for active tab sub-text */
+        .build-guide-tab-active .tab-subtext {
+            color: #3B82F6;
+        }
+        
+        /* Interactive Diagram Styles */
+        .control-arrow {
+            fill: #9CA3AF; /* Gray */
+            opacity: 0.2;
+            transition: opacity 0.1s linear;
+        }
+        .control-arrow.highlighted {
+            fill: #3B82F6; /* Blue */
+            opacity: 1;
+        }
+        .stick-gimbal {
+            fill: #4A5568;
+        }
+        .stick-top {
+            fill: #2D3748;
+            cursor: grab;
+            transition: fill 0.1s linear;
+        }
+        .stick-top:active {
+            cursor: grabbing;
+            fill: #3B82F6;
+        }
+        /* Highlight states for JS */
+        .controller-diagram g.highlighted .stick-gimbal {
+            fill: #5a677d;
+        }
+        .controller-diagram g.highlighted .stick-top {
+            fill: #3B82F6;
+        }
+        .controller-diagram .switch.highlighted rect {
+            fill: #3B82F6;
+        }
+        .interactive-text-box:hover {
+            border-color: #BFDBFE; /* blue-200 */
+            background-color: #F9FAFB; /* gray-50 */
+        }
+        #viz-drone-group {
+            transition: transform 0.05s linear;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="min-h-screen flex flex-col items-center justify-center text-center p-8 hero-bg">
+        <div class="mb-4">
+            <img src="https://raw.githubusercontent.com/mh907873-creator/Website/refs/heads/main/images/SMLogo.png" alt="STEMPilot Logo" class="max-w-sm h-auto">
+        </div>
+        <p class="font-zcool mt-2 text-3xl md:text-4xl tracking-wider text-[#2d405f]">Build. Fly. Learn.</p>
+        <p class="mt-4 max-w-2xl text-lg text-gray-600">
+            We make STEM education thrilling by teaching you to build and fly your own FPV drones.
+        </p>
+        <a href="#kits" class="mt-8 px-8 py-4 bg-blue-600 text-white font-bold rounded-lg shadow-lg hover:bg-blue-700 transition-colors">
+            Explore The Kits
+        </a>
+    </header>
+
+    <main id="content">
+        <!-- UPDATED SECTION: What is FPV / Why STEMPilot -->
+        <section id="about" class="py-20 px-8 bg-gray-50">
+            <div class="container mx-auto max-w-6xl">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-black tracking-tight text-gray-800">The STEMPilot Mission</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-start">
+                    
+                    <!-- Column 1: The FPV Paradox -->
+                    <div class="flex flex-col items-center text-center md:items-start md:text-left">
+                        <div class="flex-shrink-0 w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
+                            <!-- Heroicon: video-camera -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="mt-4 text-3xl font-bold tracking-tight text-gray-800">The FPV Paradox</h3>
+                        <p class="mt-4 text-lg text-gray-600">
+                           First Person View (FPV) flying is thrilling to watch, with viral videos of drones diving down mountains and weaving through impossible gaps.
+                        </p>
+                        <p class="mt-2 text-lg text-gray-600">
+                            But this popular hobby has a high barrier to entry. It requires technical knowledge, and the community's "build, fly, crash, repeat" mantra can be intimidating and costly for beginners, leaving its potential as an accessible activity untapped.
+                        </p>
+                    </div>
+
+                    <!-- Column 2: The STEM Opportunity -->
+                    <div class="flex flex-col items-center text-center md:items-start md:text-left">
+                        <div class="flex-shrink-0 w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
+                             <!-- Heroicon: academic-cap -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18s-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                        <h3 class="mt-4 text-3xl font-bold tracking-tight text-gray-800">The STEM Opportunity</h3>
+                        <p class="mt-4 text-lg text-gray-600">
+                           At the same time, the STEM toy market is stagnant, filled with products that offer a single, short-lived experience. There is a huge opportunity for a product that fosters genuine, long-term skill development.
+                        </p>
+                        <p class="mt-2 text-lg text-gray-600">
+                            STEMPilot bridges this gap. Our 3-level system "hides the vegetables" by embedding complex lessons in the engaging, hands-on process of building and flying a drone you can actually repair and upgrade.
+                        </loc>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW SECTION: Disciplines of FPV -->
+        <section id="disciplines" class="py-20 px-8 bg-white">
+            <div class="container mx-auto max-w-6xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-black tracking-tight text-gray-800">What Can You Do With FPV?</h2>
+                    <p class="mt-2 text-lg text-gray-600">FPV isn't just one thing. It's a creative tool for high-speed action, exploration, and art.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    
+                    <!-- Discipline 1: Freestyle -->
+                    <div class="flex flex-col bg-gray-50 rounded-lg shadow-lg overflow-hidden">
+                        <div class="aspect-video w-full">
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/Tal7DopkD3E?si=RV-1HXdzLP705sV9&amp;start=28&amp;loop=1&amp;playlist=Tal7DopkD3E&amp;autoplay=1&amp;mute=1&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gray-800">Freestyle</h3>
+                            <p class="mt-2 text-gray-600">Acrobatic flight focused on creativity and technical skill. Pilots perform flips, rolls, and dive through complex environments.</p>
+                            <p class="mt-2 text-sm text-gray-500">Video credit: Props Shop</p>
+                        </div>
+                    </div>
+
+                    <!-- Discipline 2: Long Range -->
+                    <div class="flex flex-col bg-gray-50 rounded-lg shadow-lg overflow-hidden">
+                        <div class="aspect-video w-full">
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/YPNtouPtkJY?si=ljx2Kf8kGi7KB2Ci&amp;start=143&amp;loop=1&amp;playlist=YPNtouPtkJY&amp;autoplay=1&amp;mute=1&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gray-800">Long Range</h3>
+                            <p class="mt-2 text-gray-600">The art of exploring scenic landscapes. Pilots fly for several kilometers, focusing on efficiency, navigation, and capturing breathtaking views.</p>
+                             <p class="mt-2 text-sm text-gray-500">Video credit: Jet</p>
+                        </div>
+                    </div>
+
+                    <!-- Discipline 3: Racing -->
+                    <div class="flex flex-col bg-gray-50 rounded-lg shadow-lg overflow-hidden">
+                        <div class="aspect-video w-full">
+                           <iframe class="w-full h-full" src="https://www.youtube.com/embed/GTifvVZBNWs?si=0ukL2hlDcM3vKPlg&amp;start=18&amp;loop=1&amp;playlist=GTifvVZBNWs&amp;autoplay=1&amp;mute=1&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gray-800">Racing</h3>
+                            <p class="mt-2 text-gray-600">High-speed, competitive action. Pilots navigate complex, neon-lit tracks at over 160 km/h, battling for the fastest time.</p>
+                             <p class="mt-2 text-sm text-gray-500">Video credit: DRL</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <section id="kits" class="py-20 px-8 bg-gray-50"> <!-- Changed bg -->
+            <div class="container mx-auto max-w-5xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-black tracking-tight text-gray-800">The STEMPilot Journey</h2>
+                    <p class="mt-2 text-lg text-gray-600">A progressive, three-tiered system to guide you from your first flight to advanced mastery.</p>
+                </div>
+
+                <div class="flex justify-center mb-8 border-b border-gray-300">
+                    <button class="tab-button tab-active px-6 py-3 font-semibold text-lg" onclick="openTab(event, 'nano-naught')">Nano-Naught</button>
+                    <button class="tab-button px-6 py-3 font-semibold text-lg text-gray-600" onclick="openTab(event, 'cruiser')">Cruiser Class</button>
+                    <button class="tab-button px-6 py-3 font-semibold text-lg text-gray-600" onclick="openTab(event, 'apex')">Apex Class</button>
+                </div>
+
+                <div id="nano-naught" class="tab-content">
+                    <div class="grid md:grid-cols-2 gap-8 items-center glass-pane p-8 rounded-xl">
+                        <div>
+                            <img src="https://raw.githubusercontent.com/mh907873-creator/Website/3e453f7958fff8d5649b7f8d18281541b5b20174/images/nn-01.png" alt="Nano-Naught Drone" class="rounded-lg">
+                        </div>
+                        <div class="space-y-4">
+                            <span class="inline-block bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">BEGINNER</span>
+                            <h3 class="text-3xl font-bold text-gray-800">The Nano-Naught</h3>
+                            <p class="text-gray-600">Your first step into the world of FPV. The Nano-Naught is a durable, solderless kit designed for safe indoor flight and a successful first build experience.</p>
+                            <div class="border-t border-gray-300 pt-4">
+                                <h4 class="font-bold text-lg mb-2 text-gray-700">Performance Estimates:</h4>
+                                <ul class="text-gray-600 space-y-1">
+                                    <li><strong>Flight Time:</strong> Up to 4 Minutes</li>
+                                    <li><strong>Top Speed:</strong> 30+ km/h</li>
+                                    <li><strong>Weight:</strong> Sub-30g (Ultra-Light)</li>
+                                    <li><strong>Power System:</strong> 1S LiPo</li>
+                                </ul>
+                            </div>
+                            <div class="border-t border-gray-300 pt-4">
+                                <h4 class="font-bold text-lg mb-2 text-gray-700">What You'll Learn:</h4>
+                                <ul class="list-disc list-inside text-gray-600">
+                                    <li>The Gyroscope & Stability</li>
+                                    <li>Video Transmission Basics</li>
+                                    <li>Fundamental Electrical Circuits</li>
+                                    <li>Newton's Third Law & Lift</li>
+                                </ul>
+                            </div>
+                            <button id="openModalBtn" class="w-full mt-4 px-6 py-3 bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 transition-colors">View Build Guide</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="cruiser" class="tab-content" style="display:none;">
+                     <div class="grid md:grid-cols-2 gap-8 items-center glass-pane p-8 rounded-xl">
+                        <div>
+                            <img src="https://github.com/mh907873-creator/Website/blob/main/images/cc-02.png?raw=true" alt="Cruiser Drone" class="rounded-lg">
+                        </div>
+                        <div class="space-y-4">
+                             <span class="inline-block bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-full">INTERMEDIATE</span>
+                            <h3 class="text-3xl font-bold text-gray-800">The Cruiser Class</h3>
+                            <p class="text-gray-600">Take your skills outdoors. The Cruiser introduces a hybrid carbon-fiber frame, more power, and your first soldering experience in a fast, agile package.</p>
+                            <div class="border-t border-gray-300 pt-4">
+                                <h4 class="font-bold text-lg mb-2 text-gray-700">Performance Estimates:</h4>
+                                <ul class="text-gray-600 space-y-1">
+                                    <li><strong>Flight Time:</strong> Up to 7 Minutes</li>
+                                    <li><strong>Top Speed:</strong> 80+ km/h</li>
+                                    <li><strong>Weight:</strong> Sub-75g</li> 
+                                    <li><strong>Power System:</strong> 2S-3S LiPo</li>
+                                </ul>
+                            </div>
+                            <div class="border-t border-gray-300 pt-4">
+                                <h4 class="font-bold text-lg mb-2 text-gray-700">What You'll Learn:</h4>
+                                <ul class="list-disc list-inside text-gray-600">
+                                    <li>"My First Solder" Skill</li>
+                                    <li>Composite Materials & Engineering</li>
+                                    <li>Power Systems & Voltage (The 'S' Rating)</li>
+                                    <li>Propeller Trade-Offs (Performance Tuning)</li>
+                                </ul>
+                            </div>
+                             <button class="w-full mt-4 px-6 py-3 bg-gray-400 text-white font-bold rounded-lg cursor-not-allowed">Build Guide Coming Soon</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="apex" class="tab-content" style="display:none;">
+                     <div class="grid md:grid-cols-2 gap-8 items-center glass-pane p-8 rounded-xl">
+                        <div>
+                            <img src="https://github.com/mh907873-creator/Website/blob/main/images/ac-03.png?raw=true" alt="Apex Drone" class="rounded-lg">
+                        </div>
+                        <div class="space-y-4">
+                            <span class="inline-block bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">ADVANCED</span>
+                            <h3 class="text-3xl font-bold text-gray-800">The Apex Class</h3>
+                            <p class="text-gray-600">Unleash full performance. The Apex is a high-power freestyle drone that teaches you advanced electronics, software tuning, and post-production skills.</p>
+                            <div class="border-t border-gray-300 pt-4">
+                                <h4 class="font-bold text-lg mb-2 text-gray-700">Performance Estimates:</h4>
+                                <ul class="text-gray-600 space-y-1">
+                                    <li><strong>Flight Time:</strong> 3-5 Minutes (Acrobatic)</li>
+                                    <li><strong>Top Speed:</strong> 120+ km/h</li>
+                                    <li><strong>Weight:</strong> Sub-250g</li>
+                                    <li><strong>Power System:</strong> 4S LiPo</li>
+                                </ul>
+                            </div>
+                            <div class="border-t border-gray-300 pt-4">
+                                <h4 class="font-bold text-lg mb-2 text-gray-700">What You'll Learn:</h4>
+                                <ul class="list-disc list-inside text-gray-600">
+                                    <li>Advanced Software (PID Tuning)</li>
+                                    <li>Power Filtering with Capacitors</li>
+                                    <li>Structural Engineering Principles</li>
+                                    <li>Post-Production (Gyroflow)</li>
+                                </ul>
+                            </div>
+                            <button class="w-full mt-4 px-6 py-3 bg-gray-400 text-white font-bold rounded-lg cursor-not-allowed">Build Guide Coming Soon</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="community" class="py-20 px-8 bg-white"> <!-- Changed bg -->
+            <div class="container mx-auto max-w-4xl text-center">
+                 <h2 class="text-4xl font-black tracking-tight text-gray-800">Join The Squadron</h2>
+                 <p class="mt-2 text-lg text-gray-600 max-w-2xl mx-auto">FPV is better together. Our community hub is the place to share your custom builds, ask for help, and showcase your best flight footage.</p>
+                 <div class="mt-8 aspect-video w-full max-w-3xl mx-auto bg-black rounded-lg shadow-lg flex items-center justify-center relative overflow-hidden">
+                    <img src="https://placehold.co/1280x720/1f2937/9ca3af?text=Awesome+FPV+Footage+Here" alt="FPV Freestyle Clip Placeholder" class="absolute w-full h-full object-cover opacity-50">
+                    <svg class="relative w-24 h-24 text-white opacity-80" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                    <div class="absolute bottom-4 left-4 text-white font-semibold bg-black bg-opacity-50 px-3 py-1 rounded">
+                        Video Coming Soon
+                    </div>
+                </div>
+                 <a href="#" class="mt-8 inline-block px-8 py-4 bg-transparent border-2 border-blue-600 text-blue-500 font-bold rounded-lg hover:bg-blue-600 hover:text-white transition-colors">
+                    Visit The Community Hub (Coming Soon)
+                </a>
+            </div>
+        </section>
+
+        <section id="flight-school" class="py-20 px-8 bg-gray-50"> <!-- Changed bg -->
+            <div class="container mx-auto max-w-6xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-black tracking-tight text-gray-800">First Flight School</h2>
+                    <p class="mt-2 text-lg text-gray-600">Drag the sticks on the controller to see what they do!</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <!-- Interactive Controller Diagram -->
+                        <svg id="controller" class="controller-diagram w-full h-auto" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <filter id="controller-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                                    <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                                    <feOffset dx="2" dy="2" result="offsetblur"/>
+                                    <feComponentTransfer><feFuncA type="linear" slope="0.5"/></feComponentTransfer>
+                                    <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+                                </filter>
+                            </defs>
+                            <rect x="50" y="20" width="300" height="210" rx="30" fill="#4A5568" filter="url(#controller-shadow)"/>
+                            <rect x="60" y="30" width="280" height="190" rx="20" fill="#2D3748"/>
+                            <g id="arm-switch" class="switch"><rect x="250" y="5" width="40" height="15" rx="5" fill="#718096" stroke="#2D3748" stroke-width="2"/><text x="270" y="15" font-size="8" fill="white" text-anchor="middle">ARM</text></g>
+                            <g id="angle-switch" class="switch"><rect x="110" y="5" width="40" height="15" rx="5" fill="#718096" stroke="#2D3748" stroke-width="2"/><text x="130" y="15" font-size="8" fill="white" text-anchor="middle">ANGLE</text></g>
+                            
+                            <!-- Left Stick -->
+                            <g id="left-stick-group">
+                                <circle class="stick-gimbal" cx="125" cy="125" r="40"/>
+                                <!-- Throttle Arrow -->
+                                <path id="arrow-throttle" class="control-arrow" d="M 125 70 L 120 80 L 130 80 Z" />
+                                <!-- Yaw Arrows -->
+                                <path id="arrow-yaw-left" class="control-arrow" d="M 80 120 L 90 125 L 90 115 Z" />
+                                <path id="arrow-yaw-right" class="control-arrow" d="M 170 120 L 160 125 L 160 115 Z" />
+                                <g id="left-stick" transform="translate(125, 155)"><circle class="stick-top" r="15"/></g>
+                            </g>
+                            
+                            <!-- Right Stick -->
+                            <g id="right-stick-group">
+                                <circle class="stick-gimbal" cx="275" cy="125" r="40"/>
+                                <!-- Pitch Arrows -->
+                                <path id="arrow-pitch-up" class="control-arrow" d="M 275 80 L 270 90 L 280 90 Z" />
+                                <path id="arrow-pitch-down" class="control-arrow" d="M 275 170 L 270 160 L 280 160 Z" />
+                                <!-- Roll Arrows -->
+                                <path id="arrow-roll-left" class="control-arrow" d="M 230 120 L 240 125 L 240 115 Z" />
+                                <path id="arrow-roll-right" class="control-arrow" d="M 320 120 L 310 125 L 310 115 Z" />
+                                <g id="right-stick" transform="translate(275, 125)"><circle class="stick-top" r="15"/></g>
+                            </g>
+                            
+                            <rect x="160" y="50" width="80" height="40" rx="5" fill="#1A202C"/>
+                            <text x="200" y="75" font-family="Inter, sans-serif" font-size="12" fill="#E2E8F0" text-anchor="middle">SCREEN</text>
+                        </svg>
+                    </div>
+                    <!-- Explanations and NEW Visualizer Box -->
+                    <div class="space-y-4">
+                        <!-- Visualizer Box -->
+                        <div id="visualizer-box" class="relative w-full aspect-square bg-gray-100 rounded-lg overflow-hidden border-2 border-gray-300">
+                            <svg id="visualizer-svg" class="w-full h-full" viewBox="0 0 100 100">
+                                <!-- Default Text -->
+                                <text id="viz-default" x="50" y="90" font-size="6" text-anchor="middle" dominant-baseline="middle" fill="#9CA3AF">
+                                    <tspan x="50" dy="-0.5em">Drag the controller sticks</tspan>
+                                    <tspan x="50" dy="1.2em">to see the drone react!</tspan>
+                                </text>
+                                
+                                <!-- Drone Graphic (Top Down) -->
+                                <g id="viz-drone-group" transform="translate(50 50) scale(0.8)">
+                                    <path d="M-25 -15 L-15 -25 L15 -25 L25 -15 L25 15 L15 25 L-15 25 L-25 15 Z" fill="none" stroke="#718096" stroke-width="3" stroke-linejoin="round"/>
+                                    <rect x="-7" y="-7" width="14" height="14" rx="3" fill="#A0AEC0"/>
+                                    <!-- Corrected front indicator -->
+                                    <polygon points="0,-15 5,-10 -5,-10" fill="#3B82F6"/>
+                                    <path d="M-25 -33 L-25 -17 M-33 -25 L-17 -25" stroke-width="2" stroke="#3B82F6" stroke-linecap="round"/>
+                                    <path d="M25 -33 L25 -17 M17 -25 L33 -25" stroke-width="2" stroke="#3B82F6" stroke-linecap="round"/>
+                                    <path d="M-25 33 L-25 17 M-33 25 L-17 25" stroke-width="2" stroke="#4A5568" stroke-linecap="round"/>
+                                    <path d="M25 33 L25 17 M17 25 L33 25" stroke-width="2" stroke="#4A5568" stroke-linecap="round"/>
+                                </g>
+                                <!-- Action Text -->
+                                <text id="viz-text" x="50" y="15" font-size="8" text-anchor="middle" dominant-baseline="middle" fill="#3B82F6" class="font-bold"></text>
+                            </svg>
+                        </div>
+                        
+                        <!-- Text Explanations -->
+                        <div id="left-stick-text" class="p-4 rounded-lg border-2 border-transparent transition-all cursor-pointer interactive-text-box" data-target="left-stick-group" data-viz="THROTTLE (UP/DOWN) & YAW (ROTATE)">
+                            <h3 class="text-2xl font-bold text-gray-800">Left Stick</h3>
+                            <div class="mt-2 text-lg text-gray-600 space-y-1">
+                                <p><strong>UP / DOWN:</strong> Controls <span class="font-bold text-blue-600">Throttle</span> (Altitude)</p>
+                                <p><strong>LEFT / RIGHT:</strong> Controls <span class="font-bold text-blue-600">Yaw</span> (Rotation)</p>
+                            </div>
+                        </div>
+                        
+                        <div id="right-stick-text" class="p-4 rounded-lg border-2 border-transparent transition-all cursor-pointer interactive-text-box" data-target="right-stick-group" data-viz="PITCH (FWD/BACK) & ROLL (LEFT/RIGHT)">
+                            <h3 class="text-2xl font-bold text-gray-800">Right Stick</h3>
+                            <div class="mt-2 text-lg text-gray-600 space-y-1">
+                                <p><strong>UP / DOWN:</strong> Controls <span class="font-bold text-blue-600">Pitch</span> (Forward/Backward)</p>
+                                <p><strong>LEFT / RIGHT:</strong> Controls <span class="font-bold text-blue-600">Roll</span> (Left/Right)</p>
+                            </div>
+                        </div>
+
+                         <div id="switches-text" class="p-4 rounded-lg border-2 border-transparent transition-all cursor-pointer interactive-text-box" data-target="arm-switch angle-switch" data-viz="ARM & FLIGHT MODE">
+                            <h3 class="text-2xl font-bold text-gray-800">Switches</h3>
+                            <div class="mt-2 text-lg text-gray-600 space-y-1">
+                                <p><strong>ARM:</strong> This is your safety switch. You must flip this to "Arm" the drone before it will fly.</p>
+                                <p><strong>ANGLE:</strong> This toggles Angle Mode (stabilized flight), which helps keep the drone level for beginners.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW: Flight Exercises Section -->
+                <div class="mt-16 pt-12 border-t border-gray-200">
+                    <div class="text-center mb-8">
+                        <h3 class="text-3xl font-bold tracking-tight text-gray-800">Your First Exercises</h3>
+                        <p class="mt-2 text-lg text-gray-600">Time to put it into practice. Be patient, and start slow!</p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Exercise 1: The Hover -->
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                            <h4 class="text-2xl font-bold text-blue-600 mb-3">1. The Hover</h4>
+                            <p class="text-gray-700 space-y-3">
+                                Your first and only goal is to achieve a stable hover. To take off, give the left stick (Throttle) a quick, confident burst upwards to "pop" the drone into the air, then immediately lower it slightly to hover at a steady height.
+                            </p>
+                            <p class="text-gray-700 mt-3">
+                                Focus *only* on using tiny throttle adjustments to stay at one altitude. Don't worry about moving around yet. Just get a feel for the throttle.
+                            </p>
+                        </div>
+                        
+                        <!-- Exercise 2: Simple Movement -->
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                            <h4 class="text-2xl font-bold text-blue-600 mb-3">2. Simple Movement</h4>
+                            <p class="text-gray-700">
+                                Once you're comfortable hovering, try a simple exercise: gently push the right stick <strong>forward</strong> to fly across the room. Use the left stick (Yaw) to turn the drone around, then fly back and land.
+                            </p>
+                            
+                            <div class="p-4 rounded-lg lesson-box mt-4">
+                                <h5 class="font-bold text-blue-700">Pro-Tip</h5>
+                                <p class="text-sm text-gray-700">As you fly forward, you'll need to add a little <strong>extra throttle</strong> (push the left stick up slightly) to maintain your height.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-center text-lg text-gray-700 mt-12 bg-yellow-50 border border-yellow-300 rounded-lg p-6">
+                        <strong>You will crash—everyone does!</strong> The most important part is to keep trying. Each battery you fly, you'll get a little bit better.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-100 border-t border-gray-200"> <!-- Changed bg -->
+        <div class="container mx-auto py-8 px-8 text-center text-gray-500">
+            <p>&copy; 2025 STEMPilot. A project by Matthew Henry.</p>
+            <p class="text-sm mt-2">Designed in Melbourne, Australia.</p>
+        </div>
+    </footer>
+
+    <div id="buildModal" class="modal">
+        <div class="modal-content">
+            <button id="closeModalBtn" class="absolute top-4 right-6 text-gray-500 hover:text-gray-800 text-3xl font-bold">&times;</button>
+            <h2 class="text-3xl font-bold mb-4 text-gray-800">Nano-Naught Build Guide</h2>
+            <!-- UPDATED TABS -->
+            <div class="border-b border-gray-300 mb-4">
+                <nav class="-mb-px flex space-x-6 text-center">
+                    <button class="build-guide-tab build-guide-tab-active whitespace-nowrap py-4 px-3" onclick="openBuildGuideTab(event, 'guide-instructions')">
+                        <span class="font-medium text-sm md:text-base">Instructions</span>
+                        <span class="text-xs text-gray-400 font-normal block tab-subtext">Text & Diagrams</span>
+                    </button>
+                    <button class="build-guide-tab whitespace-nowrap py-4 px-3 text-gray-500 hover:text-gray-700 hover:border-gray-300" onclick="openBuildGuideTab(event, 'guide-video')">
+                        <span class="font-medium text-sm md:text-base">Video Guide</span>
+                        <span class="text-xs text-gray-400 font-normal block tab-subtext">Step-by-Step Clips</span>
+                    </button>
+                    <button class="build-guide-tab whitespace-nowrap py-4 px-3 text-gray-500 hover:text-gray-700 hover:border-gray-300" onclick="openBuildGuideTab(event, 'guide-challenge')">
+                        <span class="font-medium text-sm md:text-base">Challenge Mode</span>
+                        <span class="text-xs text-gray-400 font-normal block tab-subtext">Experts Only</span>
+                    </button>
+                </nav>
+            </div>
+            <!-- UPDATED INSTRUCTIONS TAB WITH EMBEDDED LESSONS -->
+            <div id="guide-instructions" class="build-guide-tab-content modal-body space-y-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-2 border-b-2 border-blue-500 pb-1">Safety First: The Pilot's Code</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 mt-2">
+                        <li>Keep propellers separate until the final step. This is the most important rule.</li>
+                        <li>Handle LiPo batteries gently. Never use a damaged one and unplug it when not in use.</li>
+                        <li>Be aware of your airspace. Ensure the area is clear of people, pets, and obstacles before flying.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-2 border-b-2 border-blue-500 pb-1">Phase 1: Building the Core</h3>
+                    <p class="my-4 text-gray-700"><strong>Step 1: Mount the Motors.</strong> Secure the four motors using the M1.4 screws. Make sure the motor wires face inwards.</p>
+                    <img src="https://github.com/mh907873-creator/Website/blob/main/images/%231motorscrews.png?raw=true" alt="Motor Screws Diagram" class="block mx-auto rounded-lg border border-gray-300 mb-2">
+                    <img src="https://github.com/mh907873-creator/Website/blob/main/images/%232motororientation.png?raw=true" alt="Motor Orientation Diagram" class="block mx-auto rounded-lg border border-gray-300">
+                     <p class="my-4 text-gray-700"><strong>Step 2: Mount the Flight Controller (FC).</strong> Place the FC onto the frame's posts, ensuring the USB port aligns with the cutout.</p>
+                     <img src="https://github.com/mh907873-creator/Website/blob/main/images/%233fcplacement.png?raw=true" alt="FC Placement Diagram" class="block mx-auto rounded-lg border border-gray-300">
+                     <div class="p-4 rounded-lg lesson-box mt-4">
+                        <h4 class="font-bold text-blue-700">STEM Lesson: The Drone's Inner Ear</h4>
+                        <p class="text-sm text-gray-700">This board is your drone's brain and inner ear. It has a tiny sensor called a <strong>gyroscope</strong> that feels any tilt and instantly tells the motors how to adjust, keeping your drone balanced in the air.</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-2 border-b-2 border-blue-500 pb-1">Phase 2: Canopy & Connections</h3>
+                    <p class="my-4 text-gray-700"><strong>Step 3: Prepare the Canopy.</strong> Insert the camera into the canopy and secure it with the two small screws.</p>
+                    <img src="https://github.com/mh907873-creator/Website/blob/main/images/%234cameraassembly.png?raw=true" alt="Camera Assembly Diagram" class="block mx-auto rounded-lg border border-gray-300 mb-2">
+                     <p class="my-4 text-gray-700"><strong>Step 4: Connect and Mount.</strong> Connect the camera cable to the FC, poke the antenna through, and mount the canopy.</p>
+                    <img src="https://github.com/mh907873-creator/Website/blob/main/images/%235canopymounting.png?raw=true" alt="Canopy Mounting Diagram" class="block mx-auto rounded-lg border border-gray-300">
+                    <div class="p-4 rounded-lg lesson-box mt-4">
+                        <h4 class="font-bold text-blue-700">STEM Lesson: The Drone's TV Station</h4>
+                        <p class="text-sm text-gray-700">The camera is the studio, and a chip on your Flight Controller called the <strong>Video Transmitter (VTX)</strong> is the broadcast antenna. It sends the image from the camera through the air to your FPV goggles!</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-2 border-b-2 border-blue-500 pb-1">Phase 3: Final Assembly</h3>
+                     <p class="my-4 text-gray-700"><strong>Step 5: Secure the Wires.</strong> Neatly tuck each motor wire into the frame's channels and plug them into the flight controller.</p>
+                     <img src="https://github.com/mh907873-creator/Website/blob/main/images/%236motorwireroute.png?raw=true" alt="Motor Wire Routing Diagram" class="block mx-auto rounded-lg border border-gray-300 mb-2">
+                     <p class="my-4 text-gray-700"><strong>Step 6: Motor Test.</strong> Secure the battery. With props OFF, arm the drone and check motor spin direction.</p>
+                     <img src="https://github.com/mh907873-creator/Website/blob/main/images/%237batteryplacement.png?raw=true" alt="Battery Placement Diagram" class="block mx-auto rounded-lg border border-gray-300 mb-2">
+                     <img src="https://github.com/mh907873-creator/Website/blob/main/images/%238motorspindirection.png?raw=true" alt="Motor Spin Direction Diagram" class="block mx-auto rounded-lg border border-gray-300">
+                     <div class="p-4 rounded-lg lesson-box mt-4">
+                        <h4 class="font-bold text-blue-700">STEM Lesson: The Spark of Life</h4>
+                        <p class="text-sm text-gray-700">Your drone is a <strong>fundamental electrical circuit</strong>. When you plug in the battery, you complete the path, allowing electricity to flow from the battery to the "brain" (FC) and then to the motors, bringing your creation to life!</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-2 border-b-2 border-blue-500 pb-1">Phase 4: Ready for Flight</h3>
+                    <p class="my-4 text-gray-700"><strong>Step 7: Install Propellers.</strong> With the battery UNPLUGGED, press the propellers firmly onto the motor shafts. Ensure they match the CW/CCW diagram exactly.</p>
+                    <img src="https://github.com/mh907873-creator/Website/blob/main/images/CWCCWProporientation.png?raw=true" alt="Propeller Orientation Diagram" class="block mx-auto rounded-lg border border-gray-300">
+                    <div class="p-4 rounded-lg lesson-box mt-4">
+                        <h4 class="font-bold text-blue-700">STEM Lesson: The Secret of Lift</h4>
+                        <img src="https://github.com/mh907873-creator/Website/blob/main/images/liftdiagram.png?raw=true" alt="Lift Diagram" class="block mx-auto rounded-lg border border-gray-300 my-2">
+                        <p class="text-sm text-gray-700">How does a drone fly? It's all about <strong>Newton's Third Law</strong>: For every action, there is an equal and opposite reaction. Your propellers push air down (action), and the air pushes the drone up (reaction), creating lift!</p>
+                    </div>
+                </div>
+                <div class="pt-8 mt-8 border-t-2 border-gray-200">
+                    <h3 class="text-2xl font-bold mb-2 border-b-2 border-purple-500 pb-1">✨ AI Troubleshooting Assistant</h3>
+                    <p class="text-gray-600 mb-4">Stuck on a step? Describe your problem below, and our AI assistant will try to help you out!</p>
+                    <div class="space-y-4">
+                        <textarea id="aiQueryInput" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" rows="3" placeholder="e.g., 'One of my motors isn't spinning...'"></textarea>
+                        <button id="askAIButton" class="w-full px-6 py-3 bg-purple-600 text-white font-bold rounded-lg shadow-md hover:bg-purple-700 disabled:bg-gray-400">Ask The Assistant</button>
+                    </div>
+                    <div id="aiSpinner" class="spinner"></div>
+                    <div id="aiResponse" class="mt-4 p-4 bg-purple-50 border-l-4 border-purple-500 rounded-r-lg" style="display: none;"></div>
+                 </div>
+                 <div class="pt-8 mt-8 border-t-2 border-gray-200">
+                    <h3 class="text-2xl font-bold mb-4 text-center text-gray-800">Build Complete!</h3>
+                    <a href="#flight-school" id="goToFlightSchoolBtn" class="w-full block text-center px-6 py-4 bg-green-600 text-white font-bold rounded-lg shadow-md hover:bg-green-700">Go to Flight School</a>
+                 </div>
+            </div>
+            <!-- UPDATED VIDEO GUIDE TAB -->
+            <div id="guide-video" class="build-guide-tab-content modal-body space-y-4" style="display: none;">
+                <div class="aspect-video w-full bg-black rounded-lg flex items-center justify-center">
+                     <iframe id="video-player-iframe" class="w-full h-full" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <h3 id="video-title" class="text-xl font-bold text-center text-gray-800"></h3>
+                <p id="video-desc" class="text-center text-gray-600 -mt-2 mb-2"></p>
+                <!-- NEW LESSON BOX DIV -->
+                <div id="video-lesson-box" class="mt-4"></div>
+
+                <div class="flex justify-between items-center pt-4 border-t">
+                    <button id="prev-video-btn" class="px-6 py-2 bg-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-400 disabled:opacity-50 disabled:cursor-not-allowed">&larr; Previous</button>
+                    <span id="video-counter" class="text-sm font-medium text-gray-600"></span>
+                    <button id="next-video-btn" class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">Next &rarr;</button>
+                </div>
+                
+                <!-- Added AI Assistant and Flight School Button -->
+                <div class="pt-8 mt-8 border-t-2 border-gray-200">
+                    <h3 class="text-2xl font-bold mb-2 border-b-2 border-purple-500 pb-1">✨ AI Troubleshooting Assistant</h3>
+                    <p class="text-gray-600 mb-4">Stuck on a step? Describe your problem below, and our AI assistant will try to help you out!</p>
+                    <div class="space-y-4">
+                        <textarea id="aiQueryInputVideo" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" rows="3" placeholder="e.g., 'One of my motors isn't spinning...'"></textarea>
+                        <button id="askAIButtonVideo" class="w-full px-6 py-3 bg-purple-600 text-white font-bold rounded-lg shadow-md hover:bg-purple-700 disabled:bg-gray-400">Ask The Assistant</button>
+                    </div>
+                    <div id="aiSpinnerVideo" class="spinner"></div>
+                    <div id="aiResponseVideo" class="mt-4 p-4 bg-purple-50 border-l-4 border-purple-500 rounded-r-lg" style="display: none;"></div>
+                 </div>
+                 <div class="pt-8 mt-8 border-t-2 border-gray-200">
+                    <h3 class="text-2xl font-bold mb-4 text-center text-gray-800">Build Complete!</h3>
+                    <a href="#flight-school" id="goToFlightSchoolBtnVideo" class="w-full block text-center px-6 py-4 bg-green-600 text-white font-bold rounded-lg shadow-md hover:bg-green-700">Go to Flight School</a>
+                 </div>
+
+            </div>
+            <div id="guide-challenge" class="build-guide-tab-content modal-body space-y-8" style="display: none;">
+                <h3 class="text-xl font-bold">Challenge Mode: The Expert's Path</h3>
+                <p class="text-gray-700">Think you've got what it takes? Use the component overview below to assemble your Nano-Naught without step-by-step instructions. Good luck, pilot!</p>
+                <img src="https://github.com/mh907873-creator/Website/blob/main/images/component_overview.png?raw=true" alt="Component Overview" class="block mx-auto rounded-lg border border-gray-300">
+                <div class="p-4 rounded-lg lesson-box">
+                    <h4 class="font-bold text-blue-700">Parts Checklist</h4>
+                    <ul class="list-disc list-inside mt-2">
+                         <li>Use the table image for quantities:</li>
+                         <img src="https://github.com/mh907873-creator/Website/blob/main/images/component_table.png?raw=true" alt="Component Table" class="block mx-auto rounded-lg border border-gray-300 my-2">
+                    </ul>
+                </div>
+                
+                <!-- Added AI Assistant and Flight School Button -->
+                <div class="pt-8 mt-8 border-t-2 border-gray-200">
+                    <h3 class="text-2xl font-bold mb-2 border-b-2 border-purple-500 pb-1">✨ AI Troubleshooting Assistant</h3>
+                    <p class="text-gray-600 mb-4">Stuck on a step? Describe your problem below, and our AI assistant will try to help you out!</p>
+                    <div class="space-y-4">
+                        <textarea id="aiQueryInputChallenge" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" rows="3" placeholder="e.g., 'One of my motors isn't spinning...'"></textarea>
+                        <button id="askAIButtonChallenge" class="w-full px-6 py-3 bg-purple-600 text-white font-bold rounded-lg shadow-md hover:bg-purple-700 disabled:bg-gray-400">Ask The Assistant</button>
+                    </div>
+                    <div id="aiSpinnerChallenge" class="spinner"></div>
+                    <div id="aiResponseChallenge" class="mt-4 p-4 bg-purple-50 border-l-4 border-purple-500 rounded-r-lg" style="display: none;"></div>
+                 </div>
+                 <div class="pt-8 mt-8 border-t-2 border-gray-200">
+                    <h3 class="text-2xl font-bold mb-4 text-center text-gray-800">Build Complete!</h3>
+                    <a href="#flight-school" id="goToFlightSchoolBtnChallenge" class="w-full block text-center px-6 py-4 bg-green-600 text-white font-bold rounded-lg shadow-md hover:bg-green-700">Go to Flight School</a>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="safetyModal" class="modal">
+        <div class="modal-content">
+            <h2 class="text-3xl font-bold mb-4 text-gray-800">🚨 CASA Safety Briefing</h2>
+            <div class="modal-body space-y-4 text-gray-700">
+                <p>Flying drones is fun, but safety is your number one priority. As a pilot in Australia, you are responsible for knowing and following the rules set by the Civil Aviation Safety Authority (CASA).</p>
+                <div class="p-4 rounded-lg lesson-box bg-yellow-50 border-yellow-500">
+                    <h4 class="font-bold text-yellow-800">The Drone Safety Rules (The Basics)</h4>
+                    <ul class="list-disc list-inside mt-2 space-y-2">
+                        <li>Only fly one drone at a time.</li>
+                        <li>Always keep your drone in your line-of-sight.</li>
+                        <li>Do not fly your drone higher than 120 metres (400 ft) above ground level.</li>
+                        <li>Keep your drone at least 30 metres away from other people.</li>
+                        <li>Do not fly over or above people (e.g. beaches, parks, events).</li>
+                        <li>Do not fly in a way that creates a hazard to another aircraft, person or property.</li>
+                        <li>Respect personal privacy. Don’t record or photograph people without their consent.</li>
+                        <li>If your drone weighs more than 250 g, you must keep it at least 5.5 km away from controlled aerodromes.</li>
+                    </ul>
+                </div>
+                <p>This is a summary only. For the complete rules, always refer to the official <a href="https://www.casa.gov.au/drones/drone-rules/drone-safety-rules" target="_blank" class="text-blue-600 hover:underline">CASA website</a>.</p>
+            </div>
+            <button id="closeSafetyModalBtn" class="w-full mt-6 px-6 py-3 bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700">I Understand and Agree to Fly Safely</button>
+        </div>
+    </div>
+
+    <script>
+        // Main Tab functionality
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" tab-active", "");
+                tablinks[i].classList.add("text-gray-600");
+                tablinks[i].classList.remove("text-white");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " tab-active";
+            evt.currentTarget.classList.remove("text-gray-600");
+            evt.currentTarget.classList.add("text-white");
+        }
+
+        // Build Guide Modal Tab functionality
+        function openBuildGuideTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("build-guide-tab-content");
+            for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
+            tablinks = document.getElementsByClassName("build-guide-tab");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" build-guide-tab-active", "");
+                tablinks[i].classList.add("text-gray-500", "hover:text-gray-700", "hover:border-gray-300");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " build-guide-tab-active";
+            evt.currentTarget.classList.remove("text-gray-500", "hover:text-gray-700", "hover:border-gray-300");
+            
+            // If switching to the video tab, reset to the first video
+            if (tabName === 'guide-video') {
+                showVideo(0);
+            } else {
+                // Stop the video when switching away from the video tab
+                const videoPlayer = document.getElementById('video-player-iframe');
+                if (videoPlayer) {
+                    videoPlayer.src = ""; // Set src to empty string to stop playback
+                }
+            }
+        }
+
+        // Modal Variables & Listeners
+        const buildModal = document.getElementById("buildModal");
+        const openModalBtn = document.getElementById("openModalBtn");
+        const closeModalBtn = document.getElementById("closeModalBtn");
+        const safetyModal = document.getElementById('safetyModal');
+        const closeSafetyModalBtn = document.getElementById('closeSafetyModalBtn');
+        
+        // Go to Flight School Buttons
+        const goToFlightSchoolBtns = [
+            document.getElementById('goToFlightSchoolBtn'),
+            document.getElementById('goToFlightSchoolBtnVideo'),
+            document.getElementById('goToFlightSchoolBtnChallenge')
+        ];
+
+        openModalBtn.onclick = () => safetyModal.style.display = "block";
+        closeModalBtn.onclick = () => buildModal.style.display = "none";
+        closeSafetyModalBtn.onclick = () => {
+            safetyModal.style.display = 'none';
+            buildModal.style.display = 'block';
+        };
+        goToFlightSchoolBtns.forEach(btn => {
+            if(btn) btn.onclick = () => buildModal.style.display = 'none';
+        });
+
+        window.onclick = (event) => {
+            if (event.target == buildModal) buildModal.style.display = "none";
+            if (event.target == safetyModal) safetyModal.style.display = "none";
+        };
+
+        // --- Video Player Logic ---
+        const videoSteps = [
+            { src: "https://www.youtube.com/embed/OqW4cYvePgA", title: "Introduction & Kit Overview", desc: "Meet your kit! We'll go over all the components and tools you'll need for your build.", lesson: "" },
+            { src: "https://www.youtube.com/embed/qsmn0BQzRR0", title: "Step 1: Mount Motors", desc: "Learn about rotational forces and the correct orientation for your motors.", lesson: "" },
+            { src: "https://www.youtube.com/embed/Ng3Jny-RrfQ", title: "Step 2: Mount Flight Controller", desc: "We'll place the 'brain' of your drone and learn about its gyroscope.", lesson: "<div class='p-4 rounded-lg lesson-box mt-4'><h4 class='font-bold text-blue-700'>STEM Lesson: The Drone's Inner Ear</h4><p class='text-sm text-gray-700'>This board is your drone's brain and inner ear. It has a tiny sensor called a <strong>gyroscope</strong> that feels any tilt and instantly tells the motors how to adjust, keeping your drone balanced in the air.</p></div>" },
+            { src: "https://www.youtube.com/embed/PnP7rCFAV1M", title: "Step 3: Prepare Canopy", desc: "See how the FPV camera and antenna are assembled into the protective canopy.", lesson: "" },
+            { src: "https://www.youtube.com/embed/v-Hl1J2s_iA", title: "Step 4: Connect & Mount Canopy", desc: "Learn how the VTX (Video Transmitter) sends a live feed to your goggles.", lesson: "<div class='p-4 rounded-lg lesson-box mt-4'><h4 class='font-bold text-blue-700'>STEM Lesson: The Drone's TV Station</h4><p class='text-sm text-gray-700'>The camera is the studio, and a chip on your Flight Controller called the <strong>Video Transmitter (VTX)</strong> is the broadcast antenna. It sends the image from the camera through the air to your FPV goggles!</p></div>" },
+            { src: "https://www.youtube.com/embed/BUW-4E3nAQc", title: "Step 5: Secure Wires & Battery", desc: "Tuck in your motor wires and learn how to safely handle the LiPo battery.", lesson: "" },
+            { src: "https://www.youtube.com/embed/U-v1Hd39Zd4", title: "Step 6: Motor Test (CRITICAL)", desc: "A crucial safety check. We'll verify our <strong>electrical circuit</strong> is complete.", lesson: "<div class='p-4 rounded-lg lesson-box mt-4'><h4 class='font-bold text-blue-700'>STEM Lesson: The Spark of Life</h4><p class='text-sm text-gray-700'>Your drone is a <strong>fundamental electrical circuit</strong>. When you plug in the battery, you complete the path, allowing electricity to flow from the battery to the 'brain' (FC) and then to the motors, bringing your creation to life!</p></div>" },
+            { src: "https://www.youtube.com/embed/3DfVByTAQ1c", title: "Step 7: Install Propellers", desc: "The final step! Learn about <strong>Newton's Third Law</strong> and how propellers create lift.", lesson: "<div class='p-4 rounded-lg lesson-box mt-4'><h4 class='font-bold text-blue-700'>STEM Lesson: The Secret of Lift</h4><img src='https://github.com/mh907873-creator/Website/blob/main/images/liftdiagram.png?raw=true' alt='Lift Diagram' class='block mx-auto rounded-lg border border-gray-300 my-2'><p class='text-sm text-gray-700'>How does a drone fly? It's all about <strong>Newton's Third Law</strong>: For every action, there is an equal and opposite reaction. Your propellers push air down (action), and the air pushes the drone up (reaction), creating lift!</p></div>" }
+        ];
+        let currentVideoIndex = 0;
+        const videoPlayer = document.getElementById('video-player-iframe');
+        const videoTitle = document.getElementById('video-title');
+        const videoDesc = document.getElementById('video-desc'); 
+        const videoLessonBox = document.getElementById('video-lesson-box'); // Get the new div
+        const videoCounter = document.getElementById('video-counter');
+        const prevVideoBtn = document.getElementById('prev-video-btn');
+        const nextVideoBtn = document.getElementById('next-video-btn');
+
+        function showVideo(index) {
+            if (!videoPlayer) return; // Exit if elements not found
+            currentVideoIndex = index;
+            
+            const videoSrc = videoSteps[index].src;
+            const videoId = videoSrc.split('/').pop().split('?')[0]; 
+            
+            videoPlayer.src = `https://www.youtube.com/embed/${videoId}?&autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0`;
+            
+            videoTitle.textContent = videoSteps[index].title;
+            videoDesc.textContent = videoSteps[index].desc; 
+            videoLessonBox.innerHTML = videoSteps[index].lesson; // Set the lesson HTML
+            videoCounter.textContent = `Step ${index + 1} of ${videoSteps.length}`;
+            
+            prevVideoBtn.disabled = index === 0;
+            nextVideoBtn.disabled = index === videoSteps.length - 1;
+        }
+        
+        if(prevVideoBtn) {
+            prevVideoBtn.onclick = () => {
+                if (currentVideoIndex > 0) {
+                    showVideo(currentVideoIndex - 1);
+                }
+            };
+        }
+        
+        if(nextVideoBtn) {
+            nextVideoBtn.onclick = () => {
+                if (currentVideoIndex < videoSteps.length - 1) {
+                    showVideo(currentVideoIndex + 1);
+                }
+            };
+        }
+
+        // Page Load Initializer
+        document.addEventListener('DOMContentLoaded', () => {
+             document.querySelector('.tab-button')?.click();
+             document.querySelector('.build-guide-tab')?.click();
+             
+             // --- Interactive Controller Diagram ---
+             const controller = document.getElementById('controller');
+             if (!controller) return; 
+
+             const leftStick = document.getElementById('left-stick');
+             const rightStick = document.getElementById('right-stick');
+             const stickRadius = 30; // Max distance from center
+             
+             const stickState = { left: { x: 0, y: -1 }, right: { x: 0, y: 0 } }; // Left Y starts at -1 (bottom)
+
+             // Visual elements
+             const arrowThrottle = document.getElementById('arrow-throttle');
+             const arrowYawLeft = document.getElementById('arrow-yaw-left');
+             const arrowYawRight = document.getElementById('arrow-yaw-right');
+             const arrowPitchUp = document.getElementById('arrow-pitch-up');
+             const arrowPitchDown = document.getElementById('arrow-pitch-down');
+             const arrowRollLeft = document.getElementById('arrow-roll-left');
+             const arrowRollRight = document.getElementById('arrow-roll-right');
+             const allArrows = document.querySelectorAll('.control-arrow');
+             
+             // Visualizer elements
+             const vizDefault = document.getElementById('viz-default');
+             const vizDroneGroup = document.getElementById('viz-drone-group');
+             const vizText = document.getElementById('viz-text');
+             const vizDroneScale = 0.8;
+             const vizBounds = 40; // How far drone can move from center
+             
+             function updateVisualizer() {
+                if (!vizDroneGroup) return;
+
+                // On stick move, hide default text
+                if (vizDefault) vizDefault.style.display = 'none';
+                if (vizDroneGroup) vizDroneGroup.style.display = 'block';
+
+                // YAW (Rotation) from Left Stick X
+                const yaw = stickState.left.x * 45; // Max 45 deg rotation
+                
+                // THROTTLE (Altitude/Scale) from Left Stick Y
+                const throttle = (stickState.left.y + 1) / 2; // 0 to 1
+                const scale = vizDroneScale + (throttle * 0.2); // Scale from 0.8 to 1.0
+
+                // PITCH (Forward/Back) from Right Stick Y
+                const pitch = -stickState.right.y * vizBounds; // Y is inverted
+
+                // ROLL (Left/Right) from Right Stick X
+                const roll = stickState.right.x * vizBounds;
+
+                vizDroneGroup.setAttribute('transform', `translate(${50 + roll}, ${50 + pitch}) scale(${scale}) rotate(${yaw})`);
+                
+                // Update text
+                if (vizText) {
+                    let text = '';
+                    // Prioritize dominant stick
+                    const lMag = Math.abs(stickState.left.x) + Math.abs(stickState.left.y + 1);
+                    const rMag = Math.abs(stickState.right.x) + Math.abs(stickState.right.y);
+
+                    if (lMag > rMag && lMag > 0.3) {
+                        if (Math.abs(stickState.left.x) > Math.abs(stickState.left.y + 1)) {
+                             text = stickState.left.x < 0 ? 'YAW LEFT (TURN LEFT)' : 'YAW RIGHT (TURN RIGHT)';
+                        } else if (stickState.left.y > -0.5) {
+                            text = 'THROTTLE UP (ASCEND)';
+                        }
+                    } else if (rMag > lMag && rMag > 0.3) {
+                         if (Math.abs(stickState.right.x) > Math.abs(stickState.right.y)) {
+                             text = stickState.right.x < 0 ? 'ROLL LEFT' : 'ROLL RIGHT';
+                         } else {
+                             text = stickState.right.y > 0 ? 'PITCH FORWARD' : 'PITCH BACKWARD';
+                         }
+                    }
+                    vizText.textContent = text;
+                }
+             }
+
+             function resetVisualizer() {
+                if (vizDefault) vizDefault.style.display = 'block';
+                if (vizDroneGroup) vizDroneGroup.setAttribute('transform', `translate(50 50) scale(${vizDroneScale}) rotate(0)`);
+                if (vizText) vizText.textContent = '';
+             }
+
+             // --- Draggable stick logic ---
+             function updateArrowHighlights() {
+                allArrows.forEach(arrow => arrow.classList.remove('highlighted'));
+                if (stickState.left.y > 0.5) arrowThrottle.classList.add('highlighted');
+                if (stickState.left.x < -0.5) arrowYawLeft.classList.add('highlighted');
+                if (stickState.left.x > 0.5) arrowYawRight.classList.add('highlighted');
+                if (stickState.right.y > 0.5) arrowPitchUp.classList.add('highlighted');
+                if (stickState.right.y < -0.5) arrowPitchDown.classList.add('highlighted');
+                if (stickState.right.x < -0.5) arrowRollLeft.classList.add('highlighted');
+                if (stickState.right.x > 0.5) arrowRollRight.classList.add('highlighted');
+             }
+
+             function makeStickDraggable(stickElement, state) {
+                let isDragging = false;
+                const isLeftStick = stickElement.id === 'left-stick';
+                const base_x = isLeftStick ? 125 : 275;
+                const base_y = 125;
+
+                const startDrag = (e) => {
+                    isDragging = true; 
+                    e.preventDefault(); 
+                };
+                const endDrag = () => {
+                    isDragging = false;
+                    stickElement.setAttribute('transform', `translate(${base_x}, ${isLeftStick ? base_y + stickRadius : base_y})`);
+                    state.x = 0;
+                    state.y = isLeftStick ? -1 : 0; 
+                    updateArrowHighlights();
+                    resetVisualizer(); // Reset visualizer when stick is released
+                };
+                const drag = (e) => {
+                    if (!isDragging) return;
+                    e.preventDefault();
+                    const CTM = controller.getScreenCTM();
+                    if (!CTM) return; // Guard clause if CTM is not available
+                    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                    const svgX = (clientX - CTM.e) / CTM.a;
+                    const svgY = (clientY - CTM.f) / CTM.d; 
+                    
+                    let dx = svgX - base_x;
+                    let dy = svgY - base_y;
+
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist > stickRadius) {
+                        dx = (dx / dist) * stickRadius;
+                        dy = (dy / dist) * stickRadius;
+                    }
+                    
+                    if (isLeftStick && dy > stickRadius) dy = stickRadius; 
+                    if (isLeftStick && dy < -stickRadius) dy = -stickRadius; 
+
+                    stickElement.setAttribute('transform', `translate(${base_x + dx}, ${base_y + dy})`);
+                    state.x = dx / stickRadius;
+                    state.y = -dy / stickRadius; 
+                    
+                    updateArrowHighlights();
+                    updateVisualizer(); // Update visualizer on drag
+                };
+                stickElement.addEventListener('mousedown', startDrag);
+                stickElement.addEventListener('touchstart', startDrag, { passive: false });
+                window.addEventListener('mousemove', drag);
+                window.addEventListener('touchmove', drag, { passive: false });
+                window.addEventListener('mouseup', endDrag);
+                window.addEventListener('touchend', endDrag);
+            }
+
+            if (leftStick && rightStick) {
+                makeStickDraggable(leftStick, stickState.left);
+                makeStickDraggable(rightStick, stickState.right);
+            }
+             
+             // --- Text hover to highlight controller ---
+            const interactionMap = [
+                 { textId: 'left-stick-text', targetIds: ['left-stick-group'], viz: 'THROTTLE (UP/DOWN) & YAW (ROTATE)' },
+                 { textId: 'right-stick-text', targetIds: ['right-stick-group'], viz: 'PITCH (FWD/BACK) & ROLL (LEFT/RIGHT)' },
+                 { textId: 'switches-text', targetIds: ['arm-switch', 'angle-switch'], viz: 'ARM & FLIGHT MODE' }
+            ];
+
+             const addHighlight = (targets) => {
+                targets.forEach(id => {
+                    const el = document.getElementById(id);
+                    if(el) {
+                        el.classList.add('highlighted');
+                    }
+                });
+             };
+             
+             const removeHighlight = (targets) => {
+                targets.forEach(id => {
+                    const el = document.getElementById(id);
+                     if(el) {
+                        el.classList.remove('highlighted');
+                     }
+                });
+             };
+             
+             interactionMap.forEach(item => {
+                 const textEl = document.getElementById(item.textId);
+                 if (textEl) {
+                     textEl.onmouseenter = () => {
+                         addHighlight(item.targetIds);
+                         if (vizDefault) vizDefault.style.display = 'none';
+                         if (vizDroneGroup) vizDroneGroup.style.display = 'block';
+                         if (vizText) vizText.textContent = textEl.dataset.viz || '';
+                     };
+                     textEl.onmouseleave = () => {
+                         removeHighlight(item.targetIds);
+                         if (vizDefault) vizDefault.style.display = 'block';
+                         if (vizDroneGroup) vizDroneGroup.style.display = 'none';
+                         if (vizText) vizText.textContent = '';
+                     };
+                 }
+             });
+             
+             resetVisualizer(); // Set initial state on load
+        });
+
+        // Gemini API Functionality
+        const aiQueryInput = document.getElementById('aiQueryInput');
+        const aiSpinner = document.getElementById('aiSpinner');
+        const aiResponseDiv = document.getElementById('aiResponse');
+        const aiQueryInputVideo = document.getElementById('aiQueryInputVideo');
+        const aiSpinnerVideo = document.getElementById('aiSpinnerVideo');
+        const aiResponseVideo = document.getElementById('aiResponseVideo');
+        const aiQueryInputChallenge = document.getElementById('aiQueryInputChallenge');
+        const aiSpinnerChallenge = document.getElementById('aiSpinnerChallenge');
+        const aiResponseChallenge = document.getElementById('aiResponseChallenge');
+
+        async function handleAIAssistant(query, spinner, responseDiv, button) {
+            const buildGuideContentText = document.getElementById('guide-instructions').innerText; // Use text guide as context
+            if (!query) {
+                responseDiv.style.display = 'block';
+                responseDiv.innerText = "Please enter a question first.";
+                return;
+            }
+            spinner.style.display = 'block';
+            responseDiv.style.display = 'none';
+            button.disabled = true;
+            button.innerText = 'Thinking...';
+            try {
+                const responseText = await callTroubleshootingAPI(query, buildGuideContentText);
+                responseDiv.innerHTML = responseText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                responseDiv.style.display = 'block';
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                responseDiv.innerText = "Sorry, I couldn't get a response. Please try again later.";
+                responseDiv.style.display = 'block';
+            } finally {
+                spinner.style.display = 'none';
+                button.disabled = false;
+                button.innerText = 'Ask The Assistant';
+            }
+        }
+        
+        document.getElementById('askAIButton')?.addEventListener('click', () => {
+             handleAIAssistant(aiQueryInput.value, aiSpinner, aiResponseDiv, document.getElementById('askAIButton'));
+        });
+        document.getElementById('askAIButtonVideo')?.addEventListener('click', () => {
+             handleAIAssistant(aiQueryInputVideo.value, aiSpinnerVideo, aiResponseVideo, document.getElementById('askAIButtonVideo'));
+        });
+        document.getElementById('askAIButtonChallenge')?.addEventListener('click', () => {
+             handleAIAssistant(aiQueryInputChallenge.value, aiSpinnerChallenge, aiResponseChallenge, document.getElementById('askAIButtonChallenge'));
+        });
+
+
+        async function callTroubleshootingAPI(userQuery, guideContext) {
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const systemPrompt = `You are an expert FPV drone technician and a friendly, encouraging STEM educator named Sparky. You are helping a student build the "Nano-Naught" drone kit. Base your answers strictly on the build guide context provided (which is the text-based instructions). If the question is outside the scope of the guide, politely say so. Be concise, clear, and encouraging. Address the user directly.`;
+            const fullPrompt = `BUILD GUIDE CONTEXT:\n---\n${guideContext}\n---\n\nSTUDENT'S QUESTION: "${userQuery}"`;
+            const payload = {
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+                contents: [{ parts: [{ text: fullPrompt }] }],
+            };
+            const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            if (!response.ok) throw new Error(`API call failed: ${response.status}`);
+            const result = await response.json();
+            const candidate = result.candidates?.[0];
+            if (candidate?.content?.parts?.[0]?.text) return candidate.content.parts[0].text;
+            throw new Error("Could not extract text from API response.");
+        }
+
+    </script>
+</body>
+</html>
+
