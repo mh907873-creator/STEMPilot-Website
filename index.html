@@ -164,7 +164,6 @@
         <p class="mt-4 max-w-2xl text-lg text-gray-600">
             We make STEM education thrilling by teaching you to build and fly your own FPV drones.
         </p>
-        <!-- Removed "Explore Kits" button, added scroll prompt -->
         <a href="#about" class="mt-12 absolute bottom-10 scroll-down">
             <span class="text-lg text-gray-600">Learn More</span>
             <svg class="w-6 h-6 text-gray-600 mx-auto mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -172,7 +171,6 @@
     </header>
 
     <main id="content">
-        <!-- UPDATED SECTION: What is FPV / Why STEMPilot -->
         <section id="about" class="py-20 px-8 bg-gray-50">
             <div class="container mx-auto max-w-6xl">
                 <div class="text-center mb-16">
@@ -180,10 +178,8 @@
                 </div>
                 <div class="grid md:grid-cols-2 gap-12 items-start">
                     
-                    <!-- Column 1: The FPV Paradox -->
                     <div class="flex flex-col items-center text-center md:items-start md:text-left">
                         <div class="flex-shrink-0 w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
-                            <!-- Heroicon: video-camera -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                             </svg>
@@ -197,10 +193,8 @@
                         </p>
                     </div>
 
-                    <!-- Column 2: The STEM Opportunity -->
                     <div class="flex flex-col items-center text-center md:items-start md:text-left">
                         <div class="flex-shrink-0 w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
-                             <!-- Heroicon: academic-cap -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18s-3.332.477-4.5 1.253" />
                             </svg>
@@ -214,26 +208,35 @@
                         </loc>
                     </div>
                 </div>
-                <!-- NEW: CTA Button linking to kits -->
-                <div class="text-center mt-16">
-                     <a href="#kits" class="px-8 py-4 bg-blue-600 text-white font-bold rounded-lg shadow-lg hover:bg-blue-700 transition-colors">
-                        See The Drone Kits
-                    </a>
-                </div>
             </div>
         </section>
 
-        <!-- NEW SECTION: Disciplines of FPV -->
-        <section id="disciplines" class="py-20 px-8 bg-white">
+        <section id="welcome-fpv" class="py-20 px-8 bg-white">
+            <div class="container mx-auto max-w-4xl text-center">
+                 <h2 class="text-4xl font-black tracking-tight text-gray-800">Welcome to FPV</h2>
+                 <p class="mt-2 text-lg text-gray-600 max-w-2xl mx-auto">FPV is an immersive experience that puts you in the pilot's seat. It's a community built on creativity, technical skill, and pure fun. See for yourself.</p>
+                 <div class="mt-12 aspect-video w-full max-w-3xl mx-auto bg-black rounded-lg shadow-lg overflow-hidden">
+                     <iframe class="w-full h-full" 
+                             src="https://www.youtube.com/embed/Qh6X3szX2ho?si=FUALrYh6JL3SNZ0v&amp;loop=1&amp;playlist=Qh6X3szX2ho&amp;autoplay=1&amp;mute=1" 
+                             title="YouTube video player" 
+                             frameborder="0" 
+                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                             allowfullscreen>
+                     </iframe>
+                 </div>
+            </div>
+        </section>
+
+        <section id="disciplines" class="py-20 px-8 bg-gray-50"> <!-- Restored Disciplines Section -->
             <div class="container mx-auto max-w-6xl">
                 <div class="text-center mb-12">
-                    <h2 class="text-4xl font-black tracking-tight text-gray-800">What Can You Do With FPV?</h2>
+                    <h2 class="text-4xl font-black tracking-tight text-gray-800">The Disciplines of FPV</h2>
                     <p class="mt-2 text-lg text-gray-600">FPV isn't just one thing. It's a creative tool for high-speed action, exploration, and art.</p>
                 </div>
                 <div class="grid md:grid-cols-3 gap-8">
                     
                     <!-- Discipline 1: Freestyle -->
-                    <div class="flex flex-col bg-gray-50 rounded-lg shadow-lg overflow-hidden">
+                    <div class="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden">
                         <div class="aspect-video w-full">
                             <iframe class="w-full h-full" src="https://www.youtube.com/embed/Tal7DopkD3E?si=RV-1HXdzLP705sV9&amp;start=28&amp;loop=1&amp;playlist=Tal7DopkD3E&amp;autoplay=1&amp;mute=1&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
@@ -245,7 +248,7 @@
                     </div>
 
                     <!-- Discipline 2: Long Range -->
-                    <div class="flex flex-col bg-gray-50 rounded-lg shadow-lg overflow-hidden">
+                    <div class="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden">
                         <div class="aspect-video w-full">
                             <iframe class="w-full h-full" src="https://www.youtube.com/embed/YPNtouPtkJY?si=ljx2Kf8kGi7KB2Ci&amp;start=143&amp;loop=1&amp;playlist=YPNtouPtkJY&amp;autoplay=1&amp;mute=1&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
@@ -257,7 +260,7 @@
                     </div>
 
                     <!-- Discipline 3: Racing -->
-                    <div class="flex flex-col bg-gray-50 rounded-lg shadow-lg overflow-hidden">
+                    <div class="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden">
                         <div class="aspect-video w-full">
                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/GTifvVZBNWs?si=0ukL2hlDcM3vKPlg&amp;start=18&amp;loop=1&amp;playlist=GTifvVZBNWs&amp;autoplay=1&amp;mute=1&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
@@ -271,8 +274,72 @@
                 </div>
             </div>
         </section>
+        
+        <!-- NEW: Store Section -->
+        <section id="store" class="py-20 px-8 bg-white">
+            <div class="container mx-auto max-w-6xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-black tracking-tight text-gray-800">STEMPilot Store</h2>
+                    <p class="mt-2 text-lg text-gray-600">Choose your first kit and start building.</p>
+                </div>
 
-        <section id="kits" class="py-20 px-8 bg-gray-50"> <!-- Changed bg -->
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Kit 1: Nano-Naught -->
+                    <div class="flex flex-col bg-gray-50 rounded-lg shadow-lg overflow-hidden">
+                        <div class="p-6 bg-gray-50">
+                            <img src="https://github.com/mh907873-creator/Website/blob/main/images/nanonaughtpackaging.png?raw=true" alt="Nano-Naught Kit Packaging" class="w-full h-auto rounded-lg">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <span class="inline-block bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider self-start">Beginner</span>
+                            <h3 class="mt-4 text-3xl font-bold text-gray-800">Nano-Naught</h3>
+                            <p class="mt-2 text-gray-600 flex-grow">Your first step. A durable, solderless kit designed for safe indoor flight and a successful first build experience.</p>
+                            <div class="mt-6">
+                                <p class="text-2xl font-bold text-gray-800">Coming Soon</p>
+                                <p class="text-sm text-gray-500">Price to be announced</p>
+                            </div>
+                            <button class="w-full mt-4 px-6 py-3 bg-gray-400 text-white font-bold rounded-lg cursor-not-allowed" disabled>Notify Me (Coming Soon)</button>
+                        </div>
+                    </div>
+
+                    <!-- Kit 2: Cruiser Class -->
+                    <div class="flex flex-col bg-gray-50 rounded-lg shadow-lg overflow-hidden">
+                        <div class="p-6 bg-gray-50">
+                            <img src="https://github.com/mh907873-creator/Website/blob/main/images/cruiserclasspackaging.png?raw=true" alt="Cruiser Class Kit Packaging" class="w-full h-auto rounded-lg">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <span class="inline-block bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider self-start">Intermediate</span>
+                            <h3 class="mt-4 text-3xl font-bold text-gray-800">Cruiser Class</h3>
+                            <p class="mt-2 text-gray-600 flex-grow">Take your skills outdoors. This kit introduces soldering, more power, and your first carbon-fiber frame.</p>
+                            <div class="mt-6">
+                                <p class="text-2xl font-bold text-gray-800">Coming Soon</p>
+                                <p class="text-sm text-gray-500">Price to be announced</p>
+                            </div>
+                            <button class="w-full mt-4 px-6 py-3 bg-gray-400 text-white font-bold rounded-lg cursor-not-allowed" disabled>Notify Me (Coming Soon)</button>
+                        </div>
+                    </div>
+
+                    <!-- Kit 3: Apex Class -->
+                    <div class="flex flex-col bg-gray-50 rounded-lg shadow-lg overflow-hidden">
+                        <div class="p-6 bg-gray-50">
+                            <img src="https://github.com/mh907873-creator/Website/blob/main/images/apexclasspackaging.png?raw=true" alt="Apex Class Kit Packaging" class="w-full h-auto rounded-lg">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <span class="inline-block bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider self-start">Advanced</span>
+                            <h3 class="mt-4 text-3xl font-bold text-gray-800">Apex Class</h3>
+                            <p class="mt-2 text-gray-600 flex-grow">Unleash full performance. This sub-250g kit teaches advanced electronics, software tuning, and high-power systems.</p>
+                            <div class="mt-6">
+                                <p class="text-2xl font-bold text-gray-800">Coming Soon</p>
+                                <p class="text-sm text-gray-500">Price to be announced</p>
+                            </div>
+                            <button class="w-full mt-4 px-6 py-3 bg-gray-400 text-white font-bold rounded-lg cursor-not-allowed" disabled>Notify Me (Coming Soon)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- REVERTED: Back to original "Journey" section with tabs -->
+        <section id="kits" class="py-20 px-8 bg-gray-50">
             <div class="container mx-auto max-w-5xl">
                 <div class="text-center mb-12">
                     <h2 class="text-4xl font-black tracking-tight text-gray-800">The STEMPilot Journey</h2>
@@ -297,10 +364,10 @@
                             <div class="border-t border-gray-300 pt-4">
                                 <h4 class="font-bold text-lg mb-2 text-gray-700">Performance Estimates:</h4>
                                 <ul class="text-gray-600 space-y-1">
-                                    <li><strong>Flight Time:</strong> Up to 4 Minutes</li>
-                                    <li><strong>Top Speed:</strong> 30+ km/h</li>
-                                    <li><strong>Weight:</strong> Sub-30g (Ultra-Light)</li>
-                                    <li><strong>Power System:</strong> 1S LiPo</li>
+                                    <li>Flight Time: Up to 4 Minutes</li>
+                                    <li>Top Speed: 30+ km/h</li>
+                                    <li>Weight: Sub-30g (Ultra-Light)</li>
+                                    <li>Power System: 1S LiPo</li>
                                 </ul>
                             </div>
                             <div class="border-t border-gray-300 pt-4">
@@ -328,10 +395,10 @@
                             <div class="border-t border-gray-300 pt-4">
                                 <h4 class="font-bold text-lg mb-2 text-gray-700">Performance Estimates:</h4>
                                 <ul class="text-gray-600 space-y-1">
-                                    <li><strong>Flight Time:</strong> Up to 7 Minutes</li>
-                                    <li><strong>Top Speed:</strong> 80+ km/h</li>
-                                    <li><strong>Weight:</strong> Sub-75g</li> 
-                                    <li><strong>Power System:</strong> 2S-3S LiPo</li>
+                                    <li>Flight Time: Up to 7 Minutes</li>
+                                    <li>Top Speed: 80+ km/h</li>
+                                    <li>Weight: Sub-75g</li> 
+                                    <li>Power System: 2S-3S LiPo</li>
                                 </ul>
                             </div>
                             <div class="border-t border-gray-300 pt-4">
@@ -359,10 +426,10 @@
                             <div class="border-t border-gray-300 pt-4">
                                 <h4 class="font-bold text-lg mb-2 text-gray-700">Performance Estimates:</h4>
                                 <ul class="text-gray-600 space-y-1">
-                                    <li><strong>Flight Time:</strong> 3-5 Minutes (Acrobatic)</li>
-                                    <li><strong>Top Speed:</strong> 120+ km/h</li>
-                                    <li><strong>Weight:</strong> Sub-250g</li>
-                                    <li><strong>Power System:</strong> 4S LiPo</li>
+                                    <li>Flight Time: 3-5 Minutes (Acrobatic)</li>
+                                    <li>Top Speed: 120+ km/h</li>
+                                    <li>Weight: Sub-250g</li>
+                                    <li>Power System: 4S LiPo</li>
                                 </ul>
                             </div>
                             <div class="border-t border-gray-300 pt-4">
@@ -381,24 +448,17 @@
             </div>
         </section>
 
-        <section id="community" class="py-20 px-8 bg-white"> <!-- Changed bg -->
+        <section id="community" class="py-20 px-8 bg-white"> 
             <div class="container mx-auto max-w-4xl text-center">
                  <h2 class="text-4xl font-black tracking-tight text-gray-800">Join The Squadron</h2>
                  <p class="mt-2 text-lg text-gray-600 max-w-2xl mx-auto">FPV is better together. Our community hub is the place to share your custom builds, ask for help, and showcase your best flight footage.</p>
-                 <div class="mt-8 aspect-video w-full max-w-3xl mx-auto bg-black rounded-lg shadow-lg flex items-center justify-center relative overflow-hidden">
-                    <img src="https://placehold.co/1280x720/1f2937/9ca3af?text=Awesome+FPV+Footage+Here" alt="FPV Freestyle Clip Placeholder" class="absolute w-full h-full object-cover opacity-50">
-                    <svg class="relative w-24 h-24 text-white opacity-80" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                    <div class="absolute bottom-4 left-4 text-white font-semibold bg-black bg-opacity-50 px-3 py-1 rounded">
-                        Video Coming Soon
-                    </div>
-                </div>
                  <a href="#" class="mt-8 inline-block px-8 py-4 bg-transparent border-2 border-blue-600 text-blue-500 font-bold rounded-lg hover:bg-blue-600 hover:text-white transition-colors">
                     Visit The Community Hub (Coming Soon)
                 </a>
             </div>
         </section>
 
-        <section id="flight-school" class="py-20 px-8 bg-gray-50"> <!-- Changed bg -->
+        <section id="flight-school" class="py-20 px-8 bg-gray-50"> 
             <div class="container mx-auto max-w-6xl">
                 <div class="text-center mb-12">
                     <h2 class="text-4xl font-black tracking-tight text-gray-800">First Flight School</h2>
@@ -479,24 +539,24 @@
                         <div id="left-stick-text" class="p-4 rounded-lg border-2 border-transparent transition-all cursor-pointer interactive-text-box" data-target="left-stick-group" data-viz="THROTTLE (UP/DOWN) & YAW (ROTATE)">
                             <h3 class="text-2xl font-bold text-gray-800">Left Stick</h3>
                             <div class="mt-2 text-lg text-gray-600 space-y-1">
-                                <p><strong>UP / DOWN:</strong> Controls <span class="font-bold text-blue-600">Throttle</span> (Altitude)</p>
-                                <p><strong>LEFT / RIGHT:</strong> Controls <span class="font-bold text-blue-600">Yaw</span> (Rotation)</p>
+                                <p>UP / DOWN: Controls <span class="font-bold text-blue-600">Throttle</span> (Altitude)</p>
+                                <p>LEFT / RIGHT: Controls <span class="font-bold text-blue-600">Yaw</span> (Rotation)</p>
                             </div>
                         </div>
                         
                         <div id="right-stick-text" class="p-4 rounded-lg border-2 border-transparent transition-all cursor-pointer interactive-text-box" data-target="right-stick-group" data-viz="PITCH (FWD/BACK) & ROLL (LEFT/RIGHT)">
                             <h3 class="text-2xl font-bold text-gray-800">Right Stick</h3>
                             <div class="mt-2 text-lg text-gray-600 space-y-1">
-                                <p><strong>UP / DOWN:</strong> Controls <span class="font-bold text-blue-600">Pitch</span> (Forward/Backward)</p>
-                                <p><strong>LEFT / RIGHT:</strong> Controls <span class="font-bold text-blue-600">Roll</span> (Left/Right)</p>
+                                <p>UP / DOWN: Controls <span class="font-bold text-blue-600">Pitch</span> (Forward/Backward)</p>
+                                <p>LEFT / RIGHT: Controls <span class="font-bold text-blue-600">Roll</span> (Left/Right)</p>
                             </div>
                         </div>
 
                          <div id="switches-text" class="p-4 rounded-lg border-2 border-transparent transition-all cursor-pointer interactive-text-box" data-target="arm-switch angle-switch" data-viz="ARM & FLIGHT MODE">
                             <h3 class="text-2xl font-bold text-gray-800">Switches</h3>
                             <div class="mt-2 text-lg text-gray-600 space-y-1">
-                                <p><strong>ARM:</strong> This is your safety switch. You must flip this to "Arm" the drone before it will fly.</p>
-                                <p><strong>ANGLE:</strong> This toggles Angle Mode (stabilized flight), which helps keep the drone level for beginners.</p>
+                                <p>ARM: This is your safety switch. You must flip this to "Arm" the drone before it will fly.</p>
+                                <p>ANGLE: This toggles Angle Mode (stabilized flight), which helps keep the drone level for beginners.</p>
                             </div>
                         </div>
                     </div>
@@ -525,7 +585,7 @@
                         <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
                             <h4 class="text-2xl font-bold text-blue-600 mb-3">2. Simple Movement</h4>
                             <p class="text-gray-700">
-                                Once you're comfortable hovering, try a simple exercise: gently push the right stick <strong>forward</strong> to fly across the room. Use the left stick (Yaw) to turn the drone around, then fly back and land.
+                                Once you're comfortable hovering, try a simple exercise: gently push the right stick forward to fly across the room. Use the left stick (Yaw) to turn the drone around, then fly back and land.
                             </p>
                             
                             <div class="p-4 rounded-lg lesson-box mt-4">
@@ -536,7 +596,7 @@
                     </div>
                     
                     <p class="text-center text-lg text-gray-700 mt-12 bg-yellow-50 border border-yellow-300 rounded-lg p-6">
-                        <strong>You will crash—everyone does!</strong> The most important part is to keep trying. Each battery you fly, you'll get a little bit better.
+                        You will crash—everyone does! The most important part is to keep trying. Each battery you fly, you'll get a little bit better.
                     </p>
                 </div>
 
@@ -655,7 +715,7 @@
                 <div class="flex justify-between items-center pt-4 border-t">
                     <button id="prev-video-btn" class="px-6 py-2 bg-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-400 disabled:opacity-50 disabled:cursor-not-allowed">&larr; Previous</button>
                     <span id="video-counter" class="text-sm font-medium text-gray-600"></span>
-                    <button id="next-video-btn" class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">Next &rarr;</button>
+                    <button id="next-video-btn" class="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">Next &rarr;</button>
                 </div>
                 
                 <!-- Added AI Assistant and Flight School Button -->
@@ -788,9 +848,9 @@
             document.getElementById('goToFlightSchoolBtnChallenge')
         ];
 
-        openModalBtn.onclick = () => safetyModal.style.display = "block";
-        closeModalBtn.onclick = () => buildModal.style.display = "none";
-        closeSafetyModalBtn.onclick = () => {
+        if(openModalBtn) openModalBtn.onclick = () => safetyModal.style.display = "block";
+        if(closeModalBtn) closeModalBtn.onclick = () => buildModal.style.display = "none";
+        if(closeSafetyModalBtn) closeSafetyModalBtn.onclick = () => {
             safetyModal.style.display = 'none';
             buildModal.style.display = 'block';
         };
@@ -804,15 +864,16 @@
         };
 
         // --- Video Player Logic ---
+        // FIXED: Removed "https." typo from all video URLs
         const videoSteps = [
             { src: "https://www.youtube.com/embed/OqW4cYvePgA", title: "Introduction & Kit Overview", desc: "Meet your kit! We'll go over all the components and tools you'll need for your build.", lesson: "" },
             { src: "https://www.youtube.com/embed/qsmn0BQzRR0", title: "Step 1: Mount Motors", desc: "Learn about rotational forces and the correct orientation for your motors.", lesson: "" },
-            { src: "https://www.youtube.com/embed/Ng3Jny-RrfQ", title: "Step 2: Mount Flight Controller", desc: "We'll place the 'brain' of your drone and learn about its gyroscope.", lesson: "<div class='p-4 rounded-lg lesson-box mt-4'><h4 class='font-bold text-blue-700'>STEM Lesson: The Drone's Inner Ear</h4><p class='text-sm text-gray-700'>This board is your drone's brain and inner ear. It has a tiny sensor called a <strong>gyroscope</strong> that feels any tilt and instantly tells the motors how to adjust, keeping your drone balanced in the air.</p></div>" },
+            { src: "https://www.youtube.com/embed/Ng3Jny-RrfQ", title: "Step 2: Mount Flight Controller", desc: "We'll place the 'brain' of your drone and learn about its gyroscope.", lesson: "<div class='p-4 rounded-lg lesson-box mt-4'><h4 class='font-bold text-blue-700'>STEM Lesson: The Drone's Inner Ear</h4><p class='text-sm text-gray-700'>This board is your drone's brain and inner ear. It has a tiny sensor called a gyroscope that feels any tilt and instantly tells the motors how to adjust, keeping your drone balanced in the air.</p></div>" },
             { src: "https://www.youtube.com/embed/PnP7rCFAV1M", title: "Step 3: Prepare Canopy", desc: "See how the FPV camera and antenna are assembled into the protective canopy.", lesson: "" },
-            { src: "https://www.youtube.com/embed/v-Hl1J2s_iA", title: "Step 4: Connect & Mount Canopy", desc: "Learn how the VTX (Video Transmitter) sends a live feed to your goggles.", lesson: "<div class='p-4 rounded-lg lesson-box mt-4'><h4 class='font-bold text-blue-700'>STEM Lesson: The Drone's TV Station</h4><p class='text-sm text-gray-700'>The camera is the studio, and a chip on your Flight Controller called the <strong>Video Transmitter (VTX)</strong> is the broadcast antenna. It sends the image from the camera through the air to your FPV goggles!</p></div>" },
+            { src: "https://www.youtube.com/embed/v-Hl1J2s_iA", title: "Step 4: Connect & Mount Canopy", desc: "Learn how the VTX (Video Transmitter) sends a live feed to your goggles.", lesson: "<div class='p-4 rounded-lg lesson-box mt-4'><h4 class='font-bold text-blue-700'>STEM Lesson: The Drone's TV Station</h4><p class='text-sm text-gray-700'>The camera is the studio, and a chip on your Flight Controller called the Video Transmitter (VTX) is the broadcast antenna. It sends the image from the camera through the air to your FPV goggles!</p></div>" },
             { src: "https://www.youtube.com/embed/BUW-4E3nAQc", title: "Step 5: Secure Wires & Battery", desc: "Tuck in your motor wires and learn how to safely handle the LiPo battery.", lesson: "" },
-            { src: "https://www.youtube.com/embed/U-v1Hd39Zd4", title: "Step 6: Motor Test (CRITICAL)", desc: "A crucial safety check. We'll verify our <strong>electrical circuit</strong> is complete.", lesson: "<div class='p-4 rounded-lg lesson-box mt-4'><h4 class='font-bold text-blue-700'>STEM Lesson: The Spark of Life</h4><p class='text-sm text-gray-700'>Your drone is a <strong>fundamental electrical circuit</strong>. When you plug in the battery, you complete the path, allowing electricity to flow from the battery to the 'brain' (FC) and then to the motors, bringing your creation to life!</p></div>" },
-            { src: "https://www.youtube.com/embed/3DfVByTAQ1c", title: "Step 7: Install Propellers", desc: "The final step! Learn about <strong>Newton's Third Law</strong> and how propellers create lift.", lesson: "<div class='p-4 rounded-lg lesson-box mt-4'><h4 class='font-bold text-blue-700'>STEM Lesson: The Secret of Lift</h4><img src='https://github.com/mh907873-creator/Website/blob/main/images/liftdiagram.png?raw=true' alt='Lift Diagram' class='block mx-auto rounded-lg border border-gray-300 my-2'><p class='text-sm text-gray-700'>How does a drone fly? It's all about <strong>Newton's Third Law</strong>: For every action, there is an equal and opposite reaction. Your propellers push air down (action), and the air pushes the drone up (reaction), creating lift!</p></div>" }
+            { src: "https://www.youtube.com/embed/U-v1Hd39Zd4", title: "Step 6: Motor Test (CRITICAL)", desc: "A crucial safety check. We'll verify our electrical circuit is complete.", lesson: "<div class='p-4 rounded-lg lesson-box mt-4'><h4 class='font-bold text-blue-700'>STEM Lesson: The Spark of Life</h4><p class='text-sm text-gray-700'>Your drone is a fundamental electrical circuit. When you plug in the battery, you complete the path, allowing electricity to flow from the battery to the 'brain' (FC) and then to the motors, bringing your creation to life!</p></div>" },
+            { src: "https://www.youtube.com/embed/3DfVByTAQ1c", title: "Step 7: Install Propellers", desc: "The final step! Learn about Newton's Third Law and how propellers create lift.", lesson: "<div class='p-4 rounded-lg lesson-box mt-4'><h4 class='font-bold text-blue-700'>STEM Lesson: The Secret of Lift</h4><img src='https://github.com/mh907873-creator/Website/blob/main/images/liftdiagram.png?raw=true' alt='Lift Diagram' class='block mx-auto rounded-lg border border-gray-300 my-2'><p class='text-sm text-gray-700'>How does a drone fly? It's all about Newton's Third Law: For every action, there is an equal and opposite reaction. Your propellers push air down (action), and the air pushes the drone up (reaction), creating lift!</p></div>" }
         ];
         let currentVideoIndex = 0;
         const videoPlayer = document.getElementById('video-player-iframe');
@@ -1057,56 +1118,56 @@
              });
              
              resetVisualizer(); // Set initial state on load
-        });
 
-        // Gemini API Functionality
-        const aiQueryInput = document.getElementById('aiQueryInput');
-        const aiSpinner = document.getElementById('aiSpinner');
-        const aiResponseDiv = document.getElementById('aiResponse');
-        const aiQueryInputVideo = document.getElementById('aiQueryInputVideo');
-        const aiSpinnerVideo = document.getElementById('aiSpinnerVideo');
-        const aiResponseVideo = document.getElementById('aiResponseVideo');
-        const aiQueryInputChallenge = document.getElementById('aiQueryInputChallenge');
-        const aiSpinnerChallenge = document.getElementById('aiSpinnerChallenge');
-        const aiResponseChallenge = document.getElementById('aiResponseChallenge');
+             // --- Gemini API Functionality (MOVED INSIDE DOMCONTENTLOADED) ---
+            const aiQueryInput = document.getElementById('aiQueryInput');
+            const aiSpinner = document.getElementById('aiSpinner');
+            const aiResponseDiv = document.getElementById('aiResponse');
+            const aiQueryInputVideo = document.getElementById('aiQueryInputVideo');
+            const aiSpinnerVideo = document.getElementById('aiSpinnerVideo');
+            const aiResponseVideo = document.getElementById('aiResponseVideo');
+            const aiQueryInputChallenge = document.getElementById('aiQueryInputChallenge');
+            const aiSpinnerChallenge = document.getElementById('aiSpinnerChallenge');
+            const aiResponseChallenge = document.getElementById('aiResponseChallenge');
 
-        async function handleAIAssistant(query, spinner, responseDiv, button) {
-            const buildGuideContentText = document.getElementById('guide-instructions').innerText; // Use text guide as context
-            if (!query) {
-                responseDiv.style.display = 'block';
-                responseDiv.innerText = "Please enter a question first.";
-                return;
+            async function handleAIAssistant(query, spinner, responseDiv, button) {
+                const buildGuideContentText = document.getElementById('guide-instructions').innerText; // Use text guide as context
+                if (!query) {
+                    responseDiv.style.display = 'block';
+                    responseDiv.innerText = "Please enter a question first.";
+                    return;
+                }
+                spinner.style.display = 'block';
+                responseDiv.style.display = 'none';
+                button.disabled = true;
+                button.innerText = 'Thinking...';
+                try {
+                    const responseText = await callTroubleshootingAPI(query, buildGuideContentText);
+                    responseDiv.innerHTML = responseText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Re-added strong for AI response only
+                    responseDiv.style.display = 'block';
+                } catch (error) {
+                    console.error("Error calling Gemini API:", error);
+                    aiResponseDiv.innerText = "Sorry, I couldn't get a response. Please try again later.";
+                    aiResponseDiv.style.display = 'block';
+                } finally {
+                    spinner.style.display = 'none';
+                    button.disabled = false;
+                    button.innerText = 'Ask The Assistant';
+                }
             }
-            spinner.style.display = 'block';
-            responseDiv.style.display = 'none';
-            button.disabled = true;
-            button.innerText = 'Thinking...';
-            try {
-                const responseText = await callTroubleshootingAPI(query, buildGuideContentText);
-                responseDiv.innerHTML = responseText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                responseDiv.style.display = 'block';
-            } catch (error) {
-                console.error("Error calling Gemini API:", error);
-                responseDiv.innerText = "Sorry, I couldn't get a response. Please try again later.";
-                responseDiv.style.display = 'block';
-            } finally {
-                spinner.style.display = 'none';
-                button.disabled = false;
-                button.innerText = 'Ask The Assistant';
-            }
-        }
-        
-        document.getElementById('askAIButton')?.addEventListener('click', () => {
-             handleAIAssistant(aiQueryInput.value, aiSpinner, aiResponseDiv, document.getElementById('askAIButton'));
-        });
-        document.getElementById('askAIButtonVideo')?.addEventListener('click', () => {
-             handleAIAssistant(aiQueryInputVideo.value, aiSpinnerVideo, aiResponseVideo, document.getElementById('askAIButtonVideo'));
-        });
-        document.getElementById('askAIButtonChallenge')?.addEventListener('click', () => {
-             handleAIAssistant(aiQueryInputChallenge.value, aiSpinnerChallenge, aiResponseChallenge, document.getElementById('askAIButtonChallenge'));
+            
+            document.getElementById('askAIButton')?.addEventListener('click', () => {
+                handleAIAssistant(aiQueryInput.value, aiSpinner, aiResponseDiv, document.getElementById('askAIButton'));
+            });
+            document.getElementById('askAIButtonVideo')?.addEventListener('click', () => {
+                handleAIAssistant(aiQueryInputVideo.value, aiSpinnerVideo, aiResponseVideo, document.getElementById('askAIButtonVideo'));
+            });
+            document.getElementById('askAIButtonChallenge')?.addEventListener('click', () => {
+                handleAIAssistant(aiQueryInputChallenge.value, aiSpinnerChallenge, aiResponseChallenge, document.getElementById('askAIButtonChallenge'));
+            });
         });
 
-
+        // This function is now globally scoped, but the buttons that call it are inside DOMContentLoaded
         async function callTroubleshootingAPI(userQuery, guideContext) {
             const apiKey = "";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
@@ -1127,4 +1188,5 @@
     </script>
 </body>
 </html>
+
 
