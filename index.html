@@ -605,9 +605,20 @@
     </main>
 
     <footer class="bg-gray-100 border-t border-gray-200"> <!-- Changed bg -->
-        <div class="container mx-auto py-8 px-8 text-center text-gray-500">
-            <p>&copy; 2025 STEMPilot. A project by Matthew Henry.</p>
-            <p class="text-sm mt-2">Designed in Melbourne, Australia.</p>
+        <div class="container mx-auto py-12 px-8 text-center text-gray-500">
+             <!-- NEW "About" Section -->
+            <div class="max-w-2xl mx-auto mb-8">
+                <h4 class="text-lg font-semibold text-gray-700">About This Project</h4>
+                <p class="mt-2 text-sm text-gray-600">
+                    STEMPilot is an Honours project for the RMIT Bachelor of Industrial Design (Honours), created by Matthew Henry. It aims to bridge the gap between complex hobbies and the need for engaging, hands-on STEM education.
+                </p>
+                <a href="https://www.linkedin.com/in/matthew-henry-design/" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block text-sm text-blue-600 hover:underline">
+                    Connect with Matthew on LinkedIn
+                </a>
+            </div>
+            
+            <p class="text-sm">&copy; 2025 STEMPilot. A project by Matthew Henry.</p>
+            <p class="text-xs mt-2">Designed in Melbourne, Australia.</p>
         </div>
     </footer>
 
@@ -1147,8 +1158,8 @@
                     responseDiv.style.display = 'block';
                 } catch (error) {
                     console.error("Error calling Gemini API:", error);
-                    aiResponseDiv.innerText = "Sorry, I couldn't get a response. Please try again later.";
-                    aiResponseDiv.style.display = 'block';
+                    responseDiv.innerText = "Sorry, I couldn't get a response. Please try again later.";
+                    responseDiv.style.display = 'block';
                 } finally {
                     spinner.style.display = 'none';
                     button.disabled = false;
@@ -1188,5 +1199,3 @@
     </script>
 </body>
 </html>
-
-
